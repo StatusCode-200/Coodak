@@ -12,10 +12,9 @@
 - Adnan Muammar 
 - mohammad samara
 
-```
-### date
-Date published
 
+## Date :
+```
 ---
 date: 2020-10-1 10:00
 ---
