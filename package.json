@@ -1,0 +1,20 @@
+{
+  "name": "Coodak",
+  "version": "1.0.0",
+  "description": "### is is a application that  you can signin / signup  to allow you to start bulding a web site using **HTML** **CSS** **JAVASCRIPT**  throgh an online code editor that provide you the result of your code , also you can work with your partner in the same challenge to adjust the same   file with real time connection  .",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StatusCode-200/Coodak.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/StatusCode-200/Coodak/issues"
+  },
+  "homepage": "https://github.com/StatusCode-200/Coodak#readme"
+}
