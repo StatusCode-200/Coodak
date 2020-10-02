@@ -1,5 +1,5 @@
-'use strict';
-const mongoose = require('mongoose');
+"use strict";
+const mongoose = require("mongoose");
 
 const challengeSchema = mongoose.Schema({
   name : {type : String},
@@ -9,4 +9,4 @@ const challengeSchema = mongoose.Schema({
   test : {type : String , required: true},
 });
 
-module.exports = mongoose.model('challengeSchema', challengeSchema);
+module.exports = mongoose.model("challenges", challengeSchema);
