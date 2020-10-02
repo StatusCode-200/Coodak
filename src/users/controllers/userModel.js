@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 // const jwt = require('jsonwebtoken');
 require("dotenv").config();
 // const SECRET = process.env.SECRET || 'mysecret';
-const userschema = require("./users-schema.js");
+const userschema = require("../models/userSchema.js");
 
 /*const roles ={//capabilities
   user : ['read'],
@@ -14,7 +14,7 @@ const userschema = require("./users-schema.js");
 };*/
 
 
-class Users{
+class User {
   constructor() {
     this.schema = userschema;
   }
@@ -76,7 +76,7 @@ class Users{
   }
   */
   get(userName) {
-    return this.schema.find(userName);
+    return userName ? this.schema.find() : this.schema.find(userName) ;
   }
 
   create(record) {
@@ -110,4 +110,4 @@ class Users{
 
 }
 
-module.exports = new Users();
+module.exports = new User();

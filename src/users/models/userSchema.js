@@ -2,13 +2,11 @@
 const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema({
-  userName: { type: String, required: true },
+  username: { type: String, required: true },
   password: { type: String, required: true },
-  challenges:[{type: mongoose.Schema.Types.ObjectId, ref:"userChallengeSchema"}],
+  challenges:[{type: mongoose.Schema.Types.ObjectId, ref:"userChallenges"}],
   projects:[{type: mongoose.Schema.Types.ObjectId, ref:"projects"}],
-  invitation:[{type: mongoose.Schema.Types.ObjectId, ref:"invetationSchema"}],
-
-
+  invitations:[{type: mongoose.Schema.Types.ObjectId, ref:"invetations"}],
 });
 
 module.exports = mongoose.model("users", userSchema);
