@@ -2,8 +2,8 @@
 const mongoose = require("mongoose");
 
 const userChallengeSchema = mongoose.Schema({
-  user_id : mongoose.Schema.Types.ObjectId,
-  challenge_id : mongoose.Schema.Types.ObjectId,
+  user_id :{type : mongoose.Schema.Types.ObjectId, ref : "users"},
+  challenge_id :{type : mongoose.Schema.Types.ObjectId, ref : "users"},
   solution : {type : String},
 });
 
