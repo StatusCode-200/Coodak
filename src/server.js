@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 
 const testRouter = require("./test/router");
 const usersRouter = require("./users/router");
+const usersProjectsRouter = require("./userProjects/router");
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.get("/", (req, res) => {
 
 app.use("/test", testRouter);
 app.use("/users", usersRouter);
+app.use("/users", usersProjectsRouter);
 
 // page not found middleware
 app.all("*", (req, res) => {
