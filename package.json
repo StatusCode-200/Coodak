@@ -4,7 +4,9 @@
   "description": "### is is a application that  you can signin / signup  to allow you to start bulding a web site using **HTML** **CSS** **JAVASCRIPT**  throgh an online code editor that provide you the result of your code , also you can work with your partner in the same challenge to adjust the same   file with real time connection  .",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,7 @@
     "@code-fellows/supergoose": "^1.0.11",
     "base-64": "^0.1.0",
     "bcrypt": "^5.0.0",
+    "chai": "^4.2.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "eslint": "^7.10.0",

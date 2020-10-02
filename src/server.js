@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
+const testRouter = require("./test/router");
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -12,6 +14,8 @@ app.use(bodyParser.urlencoded({
 app.get("/", (req, res) => {
   res.status(200).send({ msg: "Hello World!" });
 });
+
+app.use("/test", testRouter);
 
 // page not found middleware
 app.all("*", (req, res) => {
