@@ -4,8 +4,9 @@ class Projects {
  constructor(){
    this.schema = projectsShema;
  }
-    get(owner_id) {
-      return owner_id ? this.schema.find() : this.schema.find({ owner_id }) ;
+    async get() {
+      return  await this.schema.find().populate('owner_id').exec();   
+      
     }
 
 create(record) {
