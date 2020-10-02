@@ -4,9 +4,9 @@ class Projects {
  constructor(){
    this.schema = projectsShema;
  }
-get(owner_id) {
-  return owner_id ? this.schema.find() : this.schema.find({ owner_id }) ;
-}
+    get(owner_id) {
+      return owner_id ? this.schema.find() : this.schema.find({ owner_id }) ;
+    }
 
 create(record) {
   const newRecord = new this.schema(record);
@@ -38,3 +38,6 @@ delete(userName){
 // }
 
 }
+
+
+module.exports = new Projects();
