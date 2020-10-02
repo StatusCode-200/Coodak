@@ -10,4 +10,4 @@ const projectSchema = mongoose.Schema({
   code_js: {type: String},
 });
 
-module.exports = mongoose.model('projectSchema', projectSchema);
+module.exports = mongoose.model('projects', projectSchema);
