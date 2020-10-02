@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 // const jwt = require('jsonwebtoken');
-require('dotenv').config();
+require("dotenv").config();
 // const SECRET = process.env.SECRET || 'mysecret';
-const userschema = require('./users-schema.js');
+const userschema = require("../models/userSchema.js");
 
 /*const roles ={//capabilities
   user : ['read'],
@@ -13,14 +13,14 @@ const userschema = require('./users-schema.js');
   admin : ['read','create','update','delete'],
 };*/
 
-  
-class Users{
+
+class User {
   constructor() {
     this.schema = userschema;
   }
 
   async save(record) {
-    console.log('record befor hash',record);
+    console.log("record befor hash",record);
 
     let myUser = await this.get({ userName: record.userName } );
 
@@ -76,7 +76,7 @@ class Users{
   }
   */
   get(userName) {
-    return this.schema.find(userName);
+    return userName ? this.schema.find() : this.schema.find(userName) ;
   }
 
   create(record) {
@@ -107,7 +107,7 @@ class Users{
   // delete(_id) {
   //   return this.schema.findByIdAndDelete(_id);
   // }
-  
+
 }
 
-module.exports = new Users();
+module.exports = new User();
