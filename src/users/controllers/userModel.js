@@ -67,6 +67,10 @@ class User {
     return userName ? this.schema.find() : this.schema.find(userName) ;
   }
 
+  getById(userId) {
+    return this.schema.findOne({ _id: userId})
+  }
+
   create(record) {
     const newRecord = new this.schema(record);
     return newRecord.save();
