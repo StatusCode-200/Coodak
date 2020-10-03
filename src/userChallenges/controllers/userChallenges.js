@@ -9,6 +9,10 @@ class UserChallenge {
       
     }
 
+    async getById(id) {
+      return await this.schema.findOne({_id:id}).populate("challenge_id user_id").exec();
+    }
+
 create(record) {
   const newRecord = new this.schema(record);
   return newRecord.save();

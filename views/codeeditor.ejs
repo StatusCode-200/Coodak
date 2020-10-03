@@ -1,17 +1,36 @@
 <html>
-  <head>
-    <title>Code Editor</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="style.css" />
-  </head>
+<head>
+  <title>Code Editor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <body>
-    <textarea id="html" placeholder="HTML"></textarea>
-    <textarea id="css" placeholder="CSS"></textarea>
-    <textarea id="js" placeholder="JavaScript"></textarea>
-    <iframe id="code"></iframe>
+  <link rel="stylesheet" href="/styles/codeeditor.css" />
+</head>
 
-    <script type="text/javascript" src="app.js"></script>
-  </body>
+<body>
+  <form action="/users/5f77602cef04c10bf9618c96/projects" method="POST">
+    <textarea id="html" placeholder="HTML" name="code_html"></textarea>
+    <textarea id="css" placeholder="CSS" name="code_css"></textarea>
+    <textarea id="js" placeholder="JavaScript" name="code_js"></textarea>
+    <label for=""><input type="text" name="name" id="" required>name</label>
+    <input type="hidden" name="owner_id" value="5f77602cef04c10bf9618c96">
+    <input type="submit" value="save">
+  </form>
+  <iframe id="code"></iframe>
+
+
+
+  <script type="text/javascript" src="/js/codeeditor.js"></script>
+  <% if(project !=null){ %>
+  <script>
+    document.getElementById("html").value = ` <%- project.code_html %>`;
+    document.getElementById("css").value = `<%= project.code_css %>`;
+    document.getElementById("js").value = `<%= project.code_js %>`;
+
+    manipulateIframe();
+    
+  </script>
+  <% } %>
+</body>
+
 </html>
