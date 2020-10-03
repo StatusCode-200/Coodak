@@ -26,8 +26,12 @@ app.get("/", (req, res) => {
 });
 
 app.get("/codeeditor", (req,res)=>{
-  res.render("codeeditor");
+  res.render("codeeditor",{project: null});
 });
+
+app.get("/profile", (req,res)=>{
+  res.render("profile");
+})
 
 app.use("/test", testRouter);
 app.use("/users", usersRouter);

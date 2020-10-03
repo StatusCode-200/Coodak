@@ -1,28 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+
     <main>
 
-<section id="user-info">
-    <h1> <%= profile.username %></h1>
-    <h2> <%= profile.email %> </h2>
+        <section id="user-info">
+           
 
-</section>
-<section></section>
+        </section>
+        <section id="pojects-challenges">
+            <div id="user-projects"></div>
+            <div id="user-challenges"></div>
+        </section>
     </main>
 
 
     <script>
         function fetchUserData() {
-
-            fetch("http://localhost:4001/users/1", { method: "get" }).then(res => res.json()).then(response => {
+            //get user
+            fetch("http://localhost:4001/users/5f77602cef04c10bf9618c96", { method: "get" }).then(res => res.json()).then(response => {
                 console.log(response);
+                let userSection = document.createElement("div");
+                userSection.innerHTML = `<h1>${response.data.username}</h1>`;
+                document.getElementById("user-info").appendChild(userSection);
+            });
+            //get user challenges
+            fetch("http://localhost:4001/users/5f77602cef04c10bf9618c96/userchallenges", { method: "get" }).then(res => res.json()).then(response => {
+                console.log(response);
+                response.data.forEach((challenge, i) => {
+                    let userChallenge = document.createElement("div");
+                    userChallenge.innerHTML = `<a href="http://localhost:4001/users/${challenge.user_id}/userchallenges/${challenge._id}">${challenge.challenge_id}</a>`;
+                    document.getElementById("user-challenges").appendChild(userChallenge);
+                });
+
+            });
+
+            // get user projects
+            fetch("http://localhost:4001/users/5f77602cef04c10bf9618c96/projects", { method: "get" }).then(res => res.json()).then(response => {
+                console.log(response);
+                response.data.forEach((project, i) => {
+                    let userProject = document.createElement("div");
+                    userProject.innerHTML = `<a href="http://localhost:4001/users/5f77602cef04c10bf9618c96/projects/${project._id}">${project.name}</a>`;
+                    document.getElementById("user-projects").appendChild(userProject);
+                });
+
             });
         }
         fetchUserData();
@@ -30,4 +58,5 @@
 
     </script>
 </body>
+
 </html>

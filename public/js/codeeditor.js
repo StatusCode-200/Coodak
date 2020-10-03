@@ -20,3 +20,22 @@ function compile() {
 }
 
 compile();
+
+function manipulateIframe(){
+  let html = document.getElementById("html");
+  let css = document.getElementById("css");
+  let js = document.getElementById("js");
+  let code = document.getElementById("code").contentWindow.document;
+
+  code.open();
+    code.writeln(
+      html.value +
+        "<style>" +
+        css.value +
+        "</style>" +
+        "<script>" +
+        js.value +
+        "</script>"
+    );
+    code.close();
+}

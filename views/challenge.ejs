@@ -20,7 +20,7 @@
 
             <div id="work-area">
                 <textarea name="solution" id="starter-code" cols="70" rows="40">
-                    <%= challenge.starter_code %>
+                    <%= challenge.solution? challenge.solution : challenge.starter_code %>
                 </textarea>
                 <input type="submit" value="check" onclick="checkResult()">
             </div>
