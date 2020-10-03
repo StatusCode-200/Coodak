@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aouth</title>
+</head>
+
+<body>
+    <main>
+        <a id="oauth" href="#">Login By GitHub</a>
+
+        <a href="#" id="oauthGoogle" class="google btn"><i class="fa fa-google fa-fw">
+        </i> Login with Google+
+        </a>
+
+    </main>
+    <script>
+        let URL = "https://github.com/login/oauth/authorize";
+        let options = {
+            client_id: 'd3c0c39f87fedf5a33c8',
+            redirect_uri: 'http://localhost:4000/oauth',
+            scope: 'read:user',
+            state: 'asldfjdfs'
+        }
+        let QueryString = Object.keys(options).map((key) => {
+            return `${key}=` + encodeURIComponent(options[key]);
+        }).join("&");
+        let authURL = `${URL}?${QueryString}`;
+        console.log('>>>> auth ', authURL);
+        let link = document.getElementById('oauth');
+        link.setAttribute('href', authURL);
+    </script>
+
+
+<script>
+    let googleURL = 'https://accounts.google.com/o/oauth2/v2/auth';
+
+    let googleOptions = {
+      response_type: 'code',
+      client_id: '425927941032-6o1spfk58qsfo8fdfrka1ang198ahimd.apps.googleusercontent.com',
+      redirect_uri: 'http://localhost:4000/oauth',
+      scope: 'openid email profile',
+      state: 'http://localhost',
+      access_type: 'offline'
+    }
+
+    let queryString = Object.keys(googleOptions).map((key) => {
+      return `${key}=` + encodeURIComponent(googleOptions[key]);
+    }).join("&");
+
+    let googleAuthURL = `${googleURL}?${queryString}`;
+
+    let googleLink = document.getElementById('oauthGoogle');
+    googleLink.setAttribute('href', googleAuthURL);
+  </script>
+
+
+</body>
+</html>
