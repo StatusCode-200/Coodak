@@ -19,25 +19,13 @@ class User {
     this.schema = userschema;
   }
 
-  async save(record) {
-    console.log("record befor hash",record);
-
-    let myUser = await this.get({ userName: record.userName } );
-
-    if(myUser.length === 0){
-      record.password = await bcrypt.hash(record.password, 5);
-      return await this.create(record);
-    }
-    return Promise.reject(); // ==>.catch
-  }
-
-
 
   async authenticateBasic(user,pass) {
-    const myUser = await this.get({username : user});
-    const valid = await bcrypt.compare(pass, myUser[0].password);
-    console.log('valid',myUser[0]);////
-    return valid ? myUser[0] : Promise.reject('wrong password');///
+    const myUser = await this.get( user);
+    // console.log('myUser>>',myUser);
+    const valid = await bcrypt.compare(pass, myUser.password);
+    // console.log('valid',valid);
+    return valid ? myUser : Promise.reject('wrong password');///
   }
 
   generateToken(user) {
@@ -47,29 +35,34 @@ class User {
 
   async authenticateToken(token) {
     try {
-      let tokenObject = await jwt.verify(token, SECRET);
-      console.log('token object---------->',tokenObject);
-      let theUser = await this.get({username : tokenObject.username});
-      console.log('theUser---------->',theUser);
-      if (theUser[0]) {
-        return Promise.resolve({
-          tokenObject:tokenObject,user:theUser[0],
-        });
+      let tokenObject = jwt.verify(token, SECRET);
+// console.log('tokenObject>>',tokenObject);
+      if (tokenObject) {
+        return Promise.resolve(tokenObject);
       } else {
-        return Promise.reject('User is not found!');
+        return Promise.reject();
       }
+
     } catch (e) {
-      return Promise.reject(e.message);
+      return Promise.reject();
     }
+
   }
 
-  get(userName) {
-    return userName ? this.schema.find() : this.schema.find(userName) ;
+  get(username) {
+    return username ? this.schema.findOne({username}) : this.schema.find() ;
   }
 
-  create(record) {
-    const newRecord = new this.schema(record);
-    return newRecord.save();
+  async create(record) {
+      // console.log("record befor hash",record);
+      let myUser = await this.get( record.username );
+      if(!myUser){
+        record.password = await bcrypt.hash(record.password, 5);
+        const newRecord = new this.schema(record);
+        return  newRecord.save();
+      }
+      return Promise.reject(); // ==>.catch
+  
   }
 
   update(userName, record){
