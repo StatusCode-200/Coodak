@@ -10,7 +10,7 @@ function runTest(test, solution) {
     // cp testFile.test.js to testDir
     // write inputFile.js to testDir
 
-    const testFile = `const arr = require("./inputFile");
+    const testFile = test || `const arr = require("./inputFile");
 
     var { expect } = require("chai");
 
@@ -22,7 +22,7 @@ function runTest(test, solution) {
     });
   `;
 
-    const inputFile = `// add you code here
+    const inputFile = solution || `// add you code here
   /*
   code
    */
@@ -35,7 +35,6 @@ function runTest(test, solution) {
     const randomTestNumber = Date.now() + Math.random() * 1000;
     const dirPath = path.join("..", "..", "..", "tests", `${randomTestNumber}`);
 
-    /*
     fs.mkdir(dirPath, () => {
       fs.writeFile(`${dirPath}/testFile.test.js`, testFile, function (err) {
         if (err) return reject(new Error(err.message));
@@ -58,18 +57,22 @@ function runTest(test, solution) {
 
           // prcoess ended
           child.on("exit", code => {
-            resolve({ exitCode: code, stdout, stderr });
+            fs.rmdir(dirPath, { recursive: true },  (err) => {
+              if (err) return reject(new Error(err.message));
+              resolve({ exitCode: code, stdout, stderr });
+            });
           });
 
           child.on("error", (err) => {
-            reject(new Error(err.message));
+            fs.rmdir(dirPath, { recursive: true }, (err) => {
+              if (err) return reject(new Error(err.message));
+              reject(new Error(err.message));
+            });
           });
         });
 
       });
-
     });
-    */
   });
 }
 
