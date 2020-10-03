@@ -2,8 +2,18 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 const testRouter = require("./test/router");
+const usersRouter = require("./users/router");
+const usersProjectsRouter = require("./userProjects/router");
+const usersChallengesRouter = require("./userChallenges/router");
+const ChallengesRouter = require("./challenge/router");
 
 const app = express();
+
+app.use(express.static("./public"));
+app.use(express.urlencoded({ extended: true }));
+app.set("view engine", "ejs");
+
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -16,6 +26,11 @@ app.get("/", (req, res) => {
 });
 
 app.use("/test", testRouter);
+app.use("/users", usersRouter);
+app.use("/users", usersProjectsRouter);
+app.use("/users", usersChallengesRouter);
+app.use("/challenges", ChallengesRouter);
+
 
 // page not found middleware
 app.all("*", (req, res) => {
