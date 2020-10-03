@@ -2,11 +2,22 @@ const router = require("express").Router();
 
 const challengeModel = require("../challenge/controller/challengeModel");
 
-router.get(["/", "/:challengeId"], async (req, res) => {
+
+//all challenges page
+router.get("/", async (req, res) => {
+  const results = await challengeModel.get();
+  // res.status(200).send({ data: results });
+  res.render("challenges",{challenges: results});
+});
+
+
+//one challenge page before saving into the user profile
+router.get("/:challengeId", async (req, res) => {
   const challengeId =  req.params.challengeId;
   const results = await challengeModel.get(challengeId);
-  res.status(200).send({ data: results });
+  res.render("challenge",{challenge: results[0]});
 });
+
 
 router.post("/", async (req, res) => {
   const results = await challengeModel.create(req.body);

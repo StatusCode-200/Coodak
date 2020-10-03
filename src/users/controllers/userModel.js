@@ -1,9 +1,9 @@
 "use strict";
 
 const bcrypt = require("bcrypt");
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 require("dotenv").config();
-// const SECRET = process.env.SECRET || 'mysecret';
+const SECRET = process.env.SECRET || 'mysecret';
 const userschema = require("../models/userSchema.js");
 
 /*const roles ={//capabilities
@@ -31,21 +31,9 @@ class User {
     return Promise.reject(); // ==>.catch
   }
 
-  async saveProject(data){
-    let user = await this.get({ userName: data.userName } );
-    user.projects.push(data.projects);
-    return await this.update(user.userName,user);
-  }
-
-  async saveChallenge(data){
-    let user = await this.get({ userName: data.userName } );
-    user.challenges.push(data.challenges);
-    return await this.update(user.userName,user);
-  }
 
 
-
-  /*async authenticateBasic(user,pass) {
+  async authenticateBasic(user,pass) {
     const myUser = await this.get({username : user});
     const valid = await bcrypt.compare(pass, myUser[0].password);
     console.log('valid',myUser[0]);////
@@ -53,7 +41,7 @@ class User {
   }
 
   generateToken(user) {
-    const token =  jwt.sign({ username: user.username, actions: roles[user.role] }, SECRET);
+    const token =  jwt.sign({ username: user.username, _id : user._id}, SECRET);
     return token;
   }
 
@@ -74,7 +62,7 @@ class User {
       return Promise.reject(e.message);
     }
   }
-  */
+
   get(userName) {
     return userName ? this.schema.find() : this.schema.find(userName) ;
   }
