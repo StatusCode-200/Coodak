@@ -7,6 +7,7 @@ const {
     CLIENT_ID2,
     CLIENT_SECRET2,
 } = process.env;
+
 const API_SERVER = 'http://localhost:4000/oauth';
 
 module.exports = async function (req, res, next) {
@@ -33,8 +34,6 @@ module.exports = async function (req, res, next) {
 
 // this will use the access_token github api endpoint
 async function exchangeCodeForToken(code) {
-    console.log('CLIENT_ID2',CLIENT_ID2)
-    console.log('CLIENT_SECRET2',CLIENT_SECRET2)
     const tokenResponse = await superagent.post('https://www.googleapis.com/oauth2/v4/token')
         .send({
             code: code,

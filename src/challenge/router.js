@@ -1,5 +1,7 @@
 const router = require("express").Router();
 
+const runTest = require("./controller/runTest");
+
 const challengeModel = require("../challenge/controller/challengeModel");
 
 
@@ -18,6 +20,14 @@ router.get("/:challengeId", async (req, res) => {
   res.render("challenge",{challenge: results[0]});
 });
 
+//one challenge page before saving into the user profile
+router.post("/:challengeId/test", async (req, res) => {
+  const challengeId =  req.params.challengeId;
+  const { solution } = req.body;
+  const challenges = await challengeModel.get(challengeId);
+  const result =  runTest(challenges[0].test, solution);
+  res.status(200).send({ result });
+});
 
 router.post("/", async (req, res) => {
   const results = await challengeModel.create(req.body);
