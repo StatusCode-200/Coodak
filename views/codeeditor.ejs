@@ -3,15 +3,18 @@
     <title>Code Editor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles/codeeditor.css" />
   </head>
 
   <body>
+    <form action="/users/1/projects" method="POST">
     <textarea id="html" placeholder="HTML"></textarea>
     <textarea id="css" placeholder="CSS"></textarea>
     <textarea id="js" placeholder="JavaScript"></textarea>
+    <input type="submit" value="save">
+  </form>
     <iframe id="code"></iframe>
 
-    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="js/codeeditor.js"></script>
   </body>
 </html>

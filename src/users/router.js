@@ -32,7 +32,7 @@ async function signupHandler(req, res, next) {
 }
 
 
-app.post('/signin', basicAuth ,signinHandler);
+// app.post('/signin', basicAuth ,signinHandler);
 
 
 

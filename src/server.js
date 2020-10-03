@@ -22,7 +22,11 @@ app.use(bodyParser.urlencoded({
 
 // page not found middleware
 app.get("/", (req, res) => {
-  res.status(200).send({ msg: "Hello World!" });
+  res.status(200).render("index");
+});
+
+app.get("/codeeditor", (req,res)=>{
+  res.render("codeeditor");
 });
 
 app.use("/test", testRouter);
