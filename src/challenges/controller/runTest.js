@@ -10,23 +10,11 @@ function runTest(test, solution) {
     // cp testFile.test.js to testDir
     // write inputFile.js to testDir
 
-    const testFile = test || `const arr = require("./inputFile");
-    var { expect } = require("chai");
-    describe("test", function () {
-      it("must be 3", function (done) {
-        expect(arr.length).to.equal(3);
-        done();
-      });
-    });
-  `;
+    if (!test) return reject(new Error("no test"));
+    if (!solution) return reject(new Error("no solution"));
 
-    const inputFile = solution || `// add you code here
-  /*
-  code
-   */
-  const arr = [1, 2 , 3];
-  module.exports = arr;
-  `;
+    console.log("testFile", test);
+    console.log("inputFile", solution);
 
 
     const randomTestNumber = Date.now() + Math.random() * 1000;
@@ -34,9 +22,9 @@ function runTest(test, solution) {
 
     fs.mkdir(dirPath, (err) => {
       if (err) return reject(new Error(err.message));
-      fs.writeFile(`${dirPath}/testFile.test.js`, testFile, function (err) {
+      fs.writeFile(`${dirPath}/testFile.test.js`, test, function (err) {
         if (err) return reject(new Error(err.message));
-        fs.writeFile(`${dirPath}/inputFile.js`, inputFile, function (err) {
+        fs.writeFile(`${dirPath}/inputFile.js`, solution, function (err) {
           if (err) return reject(new Error(err.message));
 
           let stdout  = "";
@@ -57,6 +45,9 @@ function runTest(test, solution) {
           child.on("exit", code => {
             fs.rmdir(dirPath, { recursive: true },  (err) => {
               if (err) return reject(new Error(err.message));
+              console.log("testCode", code);
+              console.log("stdout", stdout);
+              console.log("stderr", stderr);
               resolve({ exitCode: code, stdout, stderr });
             });
           });

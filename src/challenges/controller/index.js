@@ -27,7 +27,11 @@ exports.deleteChallnge = async (req, res) => {
 exports.testChallenge = async (req, res) => {
   const challengeId =  req.params.challengeId;
   const { solution } = req.body;
+  console.log("solution", solution);
   const challenges = await challengeModel.get(challengeId);
-  const result =  runTest(challenges[0].test, solution);
-  res.status(200).send({ result });
+  runTest(challenges[0].test, solution).then((result) => {
+    res.status(200).send({ result });
+  }).catch((err) => {
+    res.status(500).send({ msg: err.message });
+  });
 };

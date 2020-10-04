@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 
 const usersRouter = require("./users/router");
 const usersProjectsRouter = require("./userProjects/router");
@@ -14,13 +14,25 @@ app.use(express.static("./public"));
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
-
-
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({
   extended: false,
 }));
+
+app.all("*", (req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, HEAD, PUT, PATCH, POST, DELETE",
+  );
+
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept",
+  );
+  next();
+});
 
 // page not found middleware
 app.get("/", (req, res) => {
