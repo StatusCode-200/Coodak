@@ -2,12 +2,12 @@ const router = require("express").Router();
 
 const userChallengesController = require("./controllers");
 
-router.get("/:userId/userchallenges", userChallengesController.listUserChallenges);
+router.get("/:userId/challenges", userChallengesController.listUserChallenges);
 //render saved challenge in challenge page
-router.get("/:userId/userchallenges/:challengeId",userChallengesController.getUserChallenge);
+router.get("/:userId/challenges/:challengeId",userChallengesController.getUserChallenge);
 
-router.post("/:userId/userchallenges", userChallengesController.createUserChallenge);
+router.post("/:userId/challenges", userChallengesController.createUserChallenge);
 
-router.delete("/:userId/userchallenges/:challenge_id", userChallengesController.deleteUserChallenge);
+router.delete("/:userId/challenges/:challenge_id", userChallengesController.deleteUserChallenge);
 
 module.exports = router;

@@ -14,10 +14,8 @@ exports.getChallenge = async (req, res) => {
 };
 
 exports.createChallenge = async (req, res) => {
-  async (req, res) => {
-    const results = await challengeModel.create(req.body);
-    res.status(200).send({ data: results });
-  };
+  const results = await challengeModel.create(req.body);
+  res.status(200).send({ data: results });
 };
 
 exports.deleteChallnge = async (req, res) => {
