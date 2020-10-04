@@ -10,7 +10,7 @@ exports.listChallenges = async (req, res) => {
 exports.getChallenge = async (req, res) => {
   const challengeId =  req.params.challengeId;
   const results = await challengeModel.get(challengeId);
-  res.render("challenge",{challenge: results[0]});
+  res.render("challenge",{challenge: results[0], solution: null});
 };
 
 exports.createChallenge = async (req, res) => {
@@ -27,7 +27,6 @@ exports.deleteChallnge = async (req, res) => {
 exports.testChallenge = async (req, res) => {
   const challengeId =  req.params.challengeId;
   const { solution } = req.body;
-  console.log("solution", solution);
   const challenges = await challengeModel.get(challengeId);
   runTest(challenges[0].test, solution).then((result) => {
     res.status(200).send({ result });
