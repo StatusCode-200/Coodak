@@ -9,6 +9,8 @@ router.get("/", async (req, res) => {
   res.status(200).send({ data: results });
 });
 
+router.get('/secret', bearerAuth, getSecret);
+
 router.get("/:userId", async (req, res) => {
   const results = await User.getById(req.params.userId);
   res.status(200).send({ data: results });
@@ -21,7 +23,6 @@ router.post("/", async (req, res) => {
 
 router.post("/signup",signupHandler);
 router.post('/signin', basicAuth ,signinHandler);
-router.get('/secret', bearerAuth, getSecret);
 
 
 async function signupHandler(req, res, next) {
