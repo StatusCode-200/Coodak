@@ -20,18 +20,14 @@
 
             <div id="work-area">
 
-                <form action="/users/<%=challenge.challenge_id%>/test" method="POST">
-                <textarea name="solution" id="starter-code" cols="70" rows="40">
+                <form id="saveChallenge" action="/user/5f77602cef04c10bf9618c96/challenges" method="POST"><!-- save challenge to user profile -->
+                    <textarea name="solution" id="userSolution" cols="70" rows="40">
                     <%= challenge.solution? challenge.solution : challenge.starter_code %>
                 </textarea>
-                <input type="submit" value="check" onclick="checkResult()">
-            </form>
-                <button id="saveChallengeBtn">save to profile</button>
-                <form action="/userchallenges" method="POST">
-                    <input type="hidden" name="user_id" value="">
-                    <input type="hidden" name="challenge_id" value="">
-                    <input type="hidden" name="solution" value="">
-                   <input type="submit" value="save"> 
+                <input id="inputUser_id" type="hidden" name="user_id" value="5f77602cef04c10bf9618c96">
+                <input id="inputChallenge_id" type="hidden" name="challenge_id" value=`<%= challenge._id %>`>
+                <input type="submit" value="save">
+                    <button onclick="checkResult()">check</button>
                 </form>
             </div>
 
@@ -51,15 +47,13 @@
     <script src="/js/challenge.js"></script>
     <script>
         function checkResult() {
-
-            fetch("http://localhost:4000/test", { method: "get" }).then(res => res.json()).then(response => {
+            let data = document.getElementById("userSolution").value;
+            fetch("http://localhost:4000/challenges/<%= challenge._id %>/test", { method: "POST", body: JSON.stringify(data), }).then(res => res.json()).then(response => {
                 console.log(response);
                 document.getElementById('result-failed-cases').innerText = response.stderr;
                 document.getElementById('result-passed-cases').innerText = response.stdout;
             });
         }
-
-
 
     </script>
 </body>
