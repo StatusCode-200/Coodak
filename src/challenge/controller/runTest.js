@@ -74,8 +74,8 @@ function runTest(test, solution) {
   });
 }
 
-runTest().then((result) => {
-  console.log(result);
-});
+// runTest().then((result) => {
+//   console.log(result);
+// });
 
 module.exports = runTest;
