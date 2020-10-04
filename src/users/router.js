@@ -9,6 +9,11 @@ router.get("/", async (req, res) => {
   res.status(200).send({ data: results });
 });
 
+router.get("/:userId", async (req, res) => {
+  const results = await User.getById(req.params.userId);
+  res.status(200).send({ data: results });
+});
+
 router.post("/", async (req, res) => {
   const results = await User.create(req.body);
   res.status(200).send({ data: results });

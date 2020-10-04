@@ -7,6 +7,11 @@ router.get("/:userId/userchallenges", async (req, res) => {
   const results = await userChallenges.get(userId);
   res.status(200).send({ data: results });
 });
+//render saved challenge in challenge page
+router.get("/:userId/userchallenges/:challengeId", async (req, res) => {
+  const results = await userChallenges.getById(req.params.challengeId);
+  res.render("challenge",{challenge: results});
+});
 
 router.post("/:userId/userchallenges", async (req, res) => {
   const results = await userChallenges.create(req.body);

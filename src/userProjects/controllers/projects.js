@@ -9,6 +9,10 @@ class Projects {
       
     }
 
+    async getById(id) {
+      return await this.schema.findOne({_id:id});
+    }
+
 create(record) {
   const newRecord = new this.schema(record);
   return newRecord.save();
