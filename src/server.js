@@ -20,6 +20,14 @@ app.use(bodyParser.urlencoded({
   extended: false,
 }));
 
+// adnan  methodOverride
+app.use((req, res, next) => {
+  if (req.query && req.query._method){ // eslint-disable-line
+    req.method = req.query._method; // eslint-disable-line
+  }
+  next();
+});
+
 app.all("*", (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
