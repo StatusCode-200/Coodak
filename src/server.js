@@ -27,6 +27,10 @@ app.get("/", (req, res) => {
   res.status(200).render("index");
 });
 
+app.get("/signin", (req, res) => {
+  res.status(200).render("signin");
+});
+
 app.get("/codeeditor", (req,res)=>{
   res.render("codeeditor",{project: null});
 });

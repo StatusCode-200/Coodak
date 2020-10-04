@@ -19,10 +19,20 @@
             </div>
 
             <div id="work-area">
+
+                <form action="/users/<%=challenge.challenge_id%>/test" method="POST">
                 <textarea name="solution" id="starter-code" cols="70" rows="40">
                     <%= challenge.solution? challenge.solution : challenge.starter_code %>
                 </textarea>
                 <input type="submit" value="check" onclick="checkResult()">
+            </form>
+                <button id="saveChallengeBtn">save to profile</button>
+                <form action="/userchallenges" method="POST">
+                    <input type="hidden" name="user_id" value="">
+                    <input type="hidden" name="challenge_id" value="">
+                    <input type="hidden" name="solution" value="">
+                   <input type="submit" value="save"> 
+                </form>
             </div>
 
         </section>
@@ -38,10 +48,11 @@
     </main>
     <footer>
     </footer>
+    <script src="/js/challenge.js"></script>
     <script>
         function checkResult() {
 
-            fetch("http://localhost:4001/test", { method: "get" }).then(res => res.json()).then(response => {
+            fetch("http://localhost:4000/test", { method: "get" }).then(res => res.json()).then(response => {
                 console.log(response);
                 document.getElementById('result-failed-cases').innerText = response.stderr;
                 document.getElementById('result-passed-cases').innerText = response.stdout;
