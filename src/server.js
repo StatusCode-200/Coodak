@@ -6,7 +6,8 @@ const usersRouter = require("./users/router");
 const usersProjectsRouter = require("./userProjects/router");
 const usersChallengesRouter = require("./userChallenges/router");
 const ChallengesRouter = require("./challenge/router");
-
+const githubOauth = require("./auth/middleware/githubOauth");
+const googleOauth = require("./auth/middleware/googleOauth");
 const app = express();
 
 app.use(express.static("./public"));
@@ -31,13 +32,22 @@ app.get("/codeeditor", (req,res)=>{
 
 app.get("/profile", (req,res)=>{
   res.render("profile");
-})
+});
 
 app.use("/test", testRouter);
 app.use("/users", usersRouter);
 app.use("/users", usersProjectsRouter);
 app.use("/users", usersChallengesRouter);
 app.use("/challenges", ChallengesRouter);
+
+app.get("/oauth", googleOauth, (req, res) => {
+  res.status(200).redirect("/");
+});
+
+// Routes
+app.get("/oauth2", githubOauth, (req, res) => {
+  res.status(200).redirect("/");
+});
 
 
 // page not found middleware
