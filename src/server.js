@@ -6,7 +6,9 @@ const usersRouter = require("./users/router");
 const usersProjectsRouter = require("./userProjects/router");
 const usersChallengesRouter = require("./userChallenges/router");
 const ChallengesRouter = require("./challenge/router");
-const githubOauth = require("./auth/middleware/githubOauth")
+const githubOauth = require("./auth/middleware/githubOauth");
+const googleOauth = require("./auth/middleware/googleOauth")
+
 const app = express();
 
 app.use(express.static("./public"));
@@ -33,6 +35,10 @@ app.use("/challenges", ChallengesRouter);
 
 // Routes
 app.get('/oauth', githubOauth, (req, res) => {
+  res.status(200).redirect("/");
+});
+
+app.get('/oauth2', googleOauth, (req, res) => {
   res.status(200).redirect("/");
 });
 
