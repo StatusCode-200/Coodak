@@ -12,6 +12,7 @@ router.get("/", async (req, res) => {
 router.get('/secret', bearerAuth, getSecret);
 
 router.get("/:userId", async (req, res) => {
+  console.log(">>>>>>>>>>>>>>>>>>> req.cookies", req.cookies)
   const results = await User.getById(req.params.userId);
   res.status(200).send({ data: results });
 });
