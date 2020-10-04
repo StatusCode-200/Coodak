@@ -23,6 +23,13 @@
                     <%= challenge.solution? challenge.solution : challenge.starter_code %>
                 </textarea>
                 <input type="submit" value="check" onclick="checkResult()">
+                <button id="saveChallengeBtn">save to profile</button>
+                <form action="">
+                    <input type="hidden" name="user_id" value="">
+                    <input type="hidden" name="challenge_id" value="">
+                    <input type="hidden" name="solution" value="">
+                   <input type="submit" value="save"> 
+                </form>
             </div>
 
         </section>
@@ -38,6 +45,7 @@
     </main>
     <footer>
     </footer>
+    <script src="/js/challenge.js"></script>
     <script>
         function checkResult() {
 
