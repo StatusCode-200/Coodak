@@ -1,0 +1,27 @@
+<html>
+
+<head>
+  <title>add challenge</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="stylesheet" href="/styles/addChallenge.css" />
+</head>
+
+<body>
+  <form action="/challenges" method="POST">
+    <textarea id="description" placeholder="challenge description" name="description" required></textarea>
+    <textarea id="summary" placeholder="challenge summary" name="summary" required></textarea>
+    <textarea id="starter_code" placeholder="starter code" name="starter_code" required></textarea>
+    <textarea id="test" placeholder="challenge test" name="test" required></textarea>
+
+    <label for="">challenge name<input type="text" name="name" id="challengeName" required></label>
+    <input type="submit" value="save">
+  </form>
+
+
+
+
+  <!-- <script type="text/javascript" src="/js/addChallenge.js"></script> -->
+</body>
+
+</html>

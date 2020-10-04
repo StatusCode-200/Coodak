@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js --ignore 'tests/**/*.js' --ignore README"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
     "base-64": "^0.1.0",
     "bcrypt": "^5.0.0",
     "chai": "^4.2.0",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
