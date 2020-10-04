@@ -10,7 +10,7 @@ exports.listChallenges = async (req, res) => {
 exports.getChallenge = async (req, res) => {
   const challengeId =  req.params.challengeId;
   const results = await challengeModel.get(challengeId);
-  res.render("challenge",{challenge: results[0], solution: null});
+  res.render("challenge",{ challenge: results[0], solution: null });
 };
 
 exports.createChallenge = async (req, res) => {
@@ -31,6 +31,7 @@ exports.testChallenge = async (req, res) => {
   runTest(challenges[0].test, solution).then((result) => {
     res.status(200).send({ result });
   }).catch((err) => {
+    console.log("errInTest", err.message);
     res.status(500).send({ msg: err.message });
   });
 };

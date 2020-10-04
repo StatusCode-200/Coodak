@@ -5,7 +5,6 @@ const path = require("path");
 function runTest(test, solution) {
   return new Promise((resolve, reject) => {
 
-
     // mkdir testDir
     // cp testFile.test.js to testDir
     // write inputFile.js to testDir
@@ -13,20 +12,14 @@ function runTest(test, solution) {
     if (!test) return reject(new Error("no test"));
     if (!solution) return reject(new Error("no solution"));
 
-    console.log("testFile", test);
-    console.log("inputFile", solution);
-
-
-    const randomTestNumber = Date.now() + Math.random() * 1000;
+    const randomTestNumber = Date.now() + Math.floor(Math.random() * 1000);
     const dirPath = path.join("tests", `${randomTestNumber}`);
-
-    fs.mkdir(dirPath, {recursive: true}, (err) => {
+    fs.mkdir(dirPath, (err) => {
       if (err) return reject(new Error(err.message));
       fs.writeFile(`${dirPath}/testFile.test.js`, test, function (err) {
         if (err) return reject(new Error(err.message));
         fs.writeFile(`${dirPath}/inputFile.js`, solution, function (err) {
           if (err) return reject(new Error(err.message));
-
           let stdout  = "";
           let stderr  = "";
 
@@ -45,9 +38,6 @@ function runTest(test, solution) {
           child.on("exit", code => {
             fs.rmdir(dirPath, { recursive: true },  (err) => {
               if (err) return reject(new Error(err.message));
-              console.log("testCode", code);
-              console.log("stdout", stdout);
-              console.log("stderr", stderr);
               resolve({ exitCode: code, stdout, stderr });
             });
           });
@@ -59,7 +49,6 @@ function runTest(test, solution) {
             });
           });
         });
-
       });
     });
   });
