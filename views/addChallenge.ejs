@@ -9,10 +9,10 @@
 
 <body>
   <form action="/challenges" method="POST">
-    <textarea id="description" placeholder="challenge description" name="description"></textarea>
-    <textarea id="summary" placeholder="challenge summary" name="summary"></textarea>
-    <textarea id="starter_code" placeholder="starter code" name="starter_code"></textarea>
-    <textarea id="test" placeholder="challenge test" name="test"></textarea>
+    <textarea id="description" placeholder="challenge description" name="description" required></textarea>
+    <textarea id="summary" placeholder="challenge summary" name="summary" required></textarea>
+    <textarea id="starter_code" placeholder="starter code" name="starter_code" required></textarea>
+    <textarea id="test" placeholder="challenge test" name="test" required></textarea>
 
     <label for="">challenge name<input type="text" name="name" id="challengeName" required></label>
     <input type="submit" value="save">

@@ -39,6 +39,10 @@ app.get("/profile", (req,res)=>{
   res.render("profile");
 });
 
+app.get("/addChallenge", (req,res)=>{
+  res.render("addChallenge");
+});
+
 app.use("/users", usersRouter);
 app.use("/users", usersProjectsRouter);
 app.use("/users", usersChallengesRouter);

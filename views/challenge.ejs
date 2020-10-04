@@ -20,13 +20,13 @@
 
             <div id="work-area">
 
-                <form id="saveChallenge" action="/user/5f77602cef04c10bf9618c96/challenges" method="POST"><!-- save challenge to user profile -->
+              <!--  <form id="saveChallenge" action="/user/5f77602cef04c10bf9618c96/challenges" method="POST"> -->  <!-- save challenge to user profile -->
                     <textarea name="solution" id="userSolution" cols="70" rows="40">
                     <%= challenge.solution? challenge.solution : challenge.starter_code %>
                 </textarea>
                 <input id="inputUser_id" type="hidden" name="user_id" value="5f77602cef04c10bf9618c96">
                 <input id="inputChallenge_id" type="hidden" name="challenge_id" value=`<%= challenge._id %>`>
-                <input type="submit" value="save">
+                <!-- <input type="submit" value="save"> -->
                     <button onclick="checkResult()">check</button>
                 </form>
             </div>
