@@ -1,16 +1,16 @@
-'use strict';
-// const users = require('../models/users-schema.js');
-const Users = require('../../users/controllers/userModel.js');
+"use strict";
+
+const Users = require("../../users/model/userModel.js");
 
 module.exports = (req, res, next) => {
 
   if (!req.headers.authorization) {
-    return next('invalid Login , no Header !!');
+    return next("invalid Login , no Header !!");
   }
 
-  let bearer = req.headers.authorization.split(' ');
-//   console.log('Bareeeeeer>>',bearer);
-  if (bearer[0] == 'Bearer') {
+  let bearer = req.headers.authorization.split(" ");
+  //   console.log('Bareeeeeer>>',bearer);
+  if (bearer[0] == "Bearer") {
     const token = bearer[1];
     // console.log('token>>',token);
 
@@ -19,9 +19,9 @@ module.exports = (req, res, next) => {
 
       req.user = { validUser, token };
       next();
-    }).catch(err => next('invalid Token !'));
+    }).catch(err => next("invalid Token !"));
   } else {
-    return next(' INvalid Bearer');
+    return next(" INvalid Bearer");
   }
 
 };
