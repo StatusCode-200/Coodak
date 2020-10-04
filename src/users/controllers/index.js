@@ -19,23 +19,26 @@ exports.singup = async (req, res, next) => {
   const username = req.body.username;
   let isUserExist = await User.get(username);
   if (isUserExist) { // to check if the user is already exist and signup
-    res.status(403).send("user is already exist");
+    res.redirect("/signup?message=user is already exist");
     return;
   }
   User.create(req.body).then(async(user) => {
     const token = await User.generateToken(user);
-    res.status(200).json({ token:token, user:user });
+    res.cookie("token", token);
+    res.redirect("/");
   })
     .catch((err) => {
-      console.log("Wrong!!");
-      res.status(403).send(err.message);
+      res.redirect(`/signup?message=${err.message}`);
     });
 };
 
 exports.signin = (req, res, next) => {
-  try {
-    res.json({ token: req.token, username: req.body.username });
-  } catch (e) { res.status(403).json("Invalid credentials"); }
+  if(req.token){
+    res.cookie("token", req.token);
+    res.redirect("/");
+  } else {
+    res.redirect(`/signin?message=msg: ${req.error || "Invalid credentials"}`);
+  }
 };
 
 exports.getSecret = (req, res) => {

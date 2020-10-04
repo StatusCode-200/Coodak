@@ -52,6 +52,11 @@ app.get("/signin", (req, res) => {
   res.status(200).render("signin");
 });
 
+app.get("/signup", (req, res) => {
+  res.status(200).render("signup");
+});
+
+
 app.get("/codeeditor", (req,res)=>{
   res.render("codeeditor",{project: null});
 });

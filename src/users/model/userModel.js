@@ -23,9 +23,10 @@ class User {
   async authenticateBasic(user,pass) {
     const myUser = await this.get( user);
     // console.log('myUser>>',myUser);
+    if (!myUser) return Promise.reject("username/password is incorrect.");//
     const valid = await bcrypt.compare(pass, myUser.password);
     // console.log('valid',valid);
-    return valid ? myUser : Promise.reject("wrong password");///
+    return valid ? myUser : Promise.reject("username/password is incorrect");///
   }
 
   generateToken(user) {
