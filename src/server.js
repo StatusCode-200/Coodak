@@ -8,6 +8,7 @@ const usersProjectsRouter = require("./userProjects/router");
 const usersChallengesRouter = require("./userChallenges/router");
 const ChallengesRouter = require("./challenge/router");
 const githubOauth = require("./auth/middleware/githubOauth");
+
 const googleOauth = require("./auth/middleware/googleOauth");
 const app = express();
 
@@ -54,7 +55,6 @@ app.get("/oauth", googleOauth, (req, res) => {
 app.get("/oauth2", githubOauth, (req, res) => {
   res.status(200).redirect("/");
 });
-
 
 // page not found middleware
 app.all("*", (req, res) => {
