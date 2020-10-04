@@ -59,8 +59,8 @@
            })
              .then(res => res.json()).then(response => {
                 console.log(response);
-                document.getElementById('result-failed-cases').innerText = response.stderr;
-                document.getElementById('result-passed-cases').innerText = response.stdout;
+                document.getElementById('result-failed-cases').innerText = response.result.stderr;
+                document.getElementById('result-passed-cases').innerText = response.result.stdout;
             });
         }
 

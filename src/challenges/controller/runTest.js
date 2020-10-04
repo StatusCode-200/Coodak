@@ -20,7 +20,7 @@ function runTest(test, solution) {
     const randomTestNumber = Date.now() + Math.random() * 1000;
     const dirPath = path.join("tests", `${randomTestNumber}`);
 
-    fs.mkdir(dirPath, (err) => {
+    fs.mkdir(dirPath, {recursive: true}, (err) => {
       if (err) return reject(new Error(err.message));
       fs.writeFile(`${dirPath}/testFile.test.js`, test, function (err) {
         if (err) return reject(new Error(err.message));
