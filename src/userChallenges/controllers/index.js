@@ -8,7 +8,7 @@ exports.listUserChallenges = async (req, res) => {
 
 exports.getUserChallenge =  async (req, res) => {
   const results = await userChallenges.getById(req.params.challengeId);
-  res.render("challenge",{challenge: results});
+  res.render("challenge",{challenge: results.challenge_id, solution: results.solution});
 };
 
 exports.createUserChallenge = async (req, res) => {
