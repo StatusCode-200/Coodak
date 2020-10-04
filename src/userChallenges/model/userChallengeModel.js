@@ -6,11 +6,11 @@ class UserChallenge {
   }
 
   async get(user_id) {
-    return  await this.schema.find({user_id:user_id});
+    return  await this.schema.find({user_id:user_id}).populate("challenge_id").exec();
   }
 
   async getById(id) {
-    return await this.schema.findOne({_id:id}).populate("challenge_id user_id").exec();
+    return await this.schema.findOne({_id:id}).populate("challenge_id").exec();
   }
 
   create(record) {
