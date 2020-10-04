@@ -6,6 +6,8 @@ const usersContoller = require("./controllers");
 
 router.get("/", usersContoller.listUsers);
 
+router.get("/secret", bearerAuth, usersContoller.getSecret);
+
 router.get("/:userId", usersContoller.getUser);
 
 router.post("/", usersContoller.createUser);
@@ -13,7 +15,5 @@ router.post("/", usersContoller.createUser);
 router.post("/signup",usersContoller.singup);
 
 router.post("/signin", basicAuth ,usersContoller.signin);
-
-router.get("/secret", bearerAuth, usersContoller.getSecret);
 
 module.exports = router;

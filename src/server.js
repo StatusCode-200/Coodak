@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser');
 
 const usersRouter = require("./users/router");
 const usersProjectsRouter = require("./userProjects/router");
@@ -16,6 +17,7 @@ app.set("view engine", "ejs");
 
 
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({
   extended: false,
 }));
@@ -23,6 +25,10 @@ app.use(bodyParser.urlencoded({
 // page not found middleware
 app.get("/", (req, res) => {
   res.status(200).render("index");
+});
+
+app.get("/signin", (req, res) => {
+  res.status(200).render("signin");
 });
 
 app.get("/codeeditor", (req,res)=>{

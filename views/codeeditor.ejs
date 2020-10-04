@@ -24,8 +24,8 @@
   <% if(project !=null){ %>
   <script>
     document.getElementById("html").value = ` <%- project.code_html %>`;
-    document.getElementById("css").value = `<%= project.code_css %>`;
-    document.getElementById("js").value = `<%= project.code_js %>`;
+    document.getElementById("css").value = `<%- project.code_css %>`;
+    document.getElementById("js").value = `<%- project.code_js %>`;
 
     manipulateIframe();
     
