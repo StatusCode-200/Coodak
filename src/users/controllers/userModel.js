@@ -64,7 +64,9 @@ class User {
       return Promise.reject(); // ==>.catch
   
   }
-
+  getById(userId) {
+    return this.schema.findOne({ _id: userId})
+  }
   update(userName, record){
     return this.schema.findOneAndUpdate({userName},record, { new: true });
   }

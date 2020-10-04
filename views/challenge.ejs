@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+    </header>
+    <main>
+
+        <section id="started-challenge">
+
+            <div id="challenge-description">
+                <p><%= challenge.description %></p>
+            </div>
+
+            <div id="work-area">
+                <textarea name="solution" id="starter-code" cols="70" rows="40">
+                    <%= challenge.solution? challenge.solution : challenge.starter_code %>
+                </textarea>
+                <input type="submit" value="check" onclick="checkResult()">
+            </div>
+
+        </section>
+
+
+        <section id="results">
+            <div id="result-failed-cases"></div>
+            <div id="result-passed-cases"></div>
+        </section>
+
+
+
+    </main>
+    <footer>
+    </footer>
+    <script>
+        function checkResult() {
+
+            fetch("http://localhost:4001/test", { method: "get" }).then(res => res.json()).then(response => {
+                console.log(response);
+                document.getElementById('result-failed-cases').innerText = response.stderr;
+                document.getElementById('result-passed-cases').innerText = response.stdout;
+            });
+        }
+
+
+
+    </script>
+</body>
+
+</html>
