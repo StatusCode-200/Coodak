@@ -67,7 +67,6 @@ class User {
   getById(userId) {
     return this.schema.findOne({ _id: userId})
   }
-  
   update(userName, record){
     return this.schema.findOneAndUpdate({userName},record, { new: true });
   }
