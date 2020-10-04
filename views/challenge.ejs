@@ -20,8 +20,12 @@
 
             <div id="work-area">
                 <!-- save challenge to user profile -->
-                <form id="saveChallenge" action="/users/5f77602cef04c10bf9618c96/challenges" method="POST">
+                <% if (solution){  %>
+                    <form id="saveChallenge" action="/users/5f77602cef04c10bf9618c96/challenges/<%= challenge._id %>?_method=PUT" method="POST">
 
+               <%  }else{  %>
+                <form id="saveChallenge" action="/users/5f77602cef04c10bf9618c96/challenges" method="POST">
+                <% } %>
                     <textarea name="solution" id="userSolution" cols="70" rows="40">
                     <%= solution? solution : challenge.starter_code %>
                 </textarea>
