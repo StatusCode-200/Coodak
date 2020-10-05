@@ -9,6 +9,8 @@
 
 <body>
 
+  <p hidden id="projectId"></p>
+
   <form action="/users/5f77602cef04c10bf9618c96/projects" method="POST">
 
     <textarea id="html" placeholder="HTML" name="code_html"></textarea>
@@ -27,15 +29,37 @@
 
   <input type="submit" value="save">
 
+  <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js"></script>
+
+  <script>
+  const socket = io("http://localhost:4000/");
+    socket.on('connect', function(data){
+      const projectId = document.getElementById("projectId").value;
+       if(projectId){
+         console.log("projectId", projectId);
+       }
+     });
+     socket.on('data', function(data){
+     console.log("data",  data);
+     });
+     socket.on('error', function(data){
+     console.log("error",  data);
+     });
+     socket.on('disconnect', function(){
+     console.log("disconnected");
+    });
+  </script>
+
   <script type="text/javascript" src="/js/codeeditor.js"></script>
   <% if(project !=null){ %>
   <script>
     document.getElementById("html").value = ` <%- project.code_html %>`;
     document.getElementById("css").value = `<%- project.code_css %>`;
     document.getElementById("js").value = `<%- project.code_js %>`;
+    document.getElementById("projectId").value = `<%- project.id %>`;
 
     manipulateIframe();
-    
+
   </script>
   <% } %>
 </body>
