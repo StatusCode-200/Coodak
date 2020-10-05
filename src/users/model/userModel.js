@@ -20,8 +20,8 @@ class User {
   }
 
 
-  async authenticateBasic(user,pass) {
-    const myUser = await this.get( user);
+  async authenticateBasic(user, pass) {
+    const myUser = await this.get(user);
     // console.log('myUser>>',myUser);
     if (!myUser) return Promise.reject("username/password is incorrect.");//
     const valid = await bcrypt.compare(pass, myUser.password);
@@ -30,7 +30,7 @@ class User {
   }
 
   generateToken(user) {
-    const token =  jwt.sign({ username: user.username, _id : user._id}, SECRET);
+    const token = jwt.sign({ username: user.username}, SECRET);
     return token;
   }
 
@@ -38,7 +38,9 @@ class User {
     try {
       let tokenObject = jwt.verify(token, SECRET);
       if (tokenObject) {
-        return Promise.resolve(tokenObject);
+        const username = tokenObject.username;
+        const user = await  this.schema.findOne({ username });
+        return Promise.resolve(user);
       } else {
         return Promise.reject();
       }
@@ -50,34 +52,59 @@ class User {
   }
 
   get(username) {
-    return username ? this.schema.findOne({username}) : this.schema.find() ;
+    return username ? this.schema.findOne({ username }) : this.schema.find();
   }
 
   async create(record) {
     // console.log("record befor hash",record);
-    let myUser = await this.get( record.username );
-    if(!myUser){
+    let myUser = await this.get(record.username);
+    if (!myUser) {
       record.password = await bcrypt.hash(record.password, 5);
       const newRecord = new this.schema(record);
-      return  newRecord.save();
+      return newRecord.save();
     }
     return Promise.reject(); // ==>.catch
 
   }
   getById(userId) {
-    return this.schema.findOne({ _id: userId});
+    return this.schema.findOne({ _id: userId });
   }
-  update(userName, record){
-    return this.schema.findOneAndUpdate({userName},record, { new: true });
-  }
-
-  patch(userName, record){
-    return this.schema.findOneAndUpdate({userName},record, { new: true });
+  update(userName, record) {
+    return this.schema.findOneAndUpdate({ userName }, record, { new: true });
   }
 
-  delete(userName){
-    return this.schema.deleteOne({userName:userName});
+  patch(userName, record) {
+    return this.schema.findOneAndUpdate({ userName }, record, { new: true });
   }
+
+  delete(userName) {
+    return this.schema.deleteOne({ userName: userName });
+  }
+// resource is either usres or challenges 
+  rolesUsers(role, resource, ability) {
+    let allRoles = {
+      "users":{
+        "user": ["read"],
+        "admin":  ['read', 'create', 'update', 'delete', 'list'],
+      },
+      "challenges": {
+        "user": ["read"],
+        "admin":  ['read', 'create', 'update', 'delete'],
+      },
+      "userChallenges": {
+        "user":  ['read', 'create', 'update', 'delete'],
+        "admin":  ['read', 'create', 'update', 'delete'],
+      }
+    }
+
+    const rolesOfReource = allRoles[resource];
+    const abilities = rolesOfReource[role];
+
+      return abilities.includes(ability);
+
+  
+  }
+
 }
 
 module.exports = new User();
