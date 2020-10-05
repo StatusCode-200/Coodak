@@ -25,7 +25,7 @@ exports.singup = async (req, res, next) => {
   User.create(req.body).then(async(user) => {
     const token = await User.generateToken(user);
     res.cookie("token", token);
-    res.redirect("/sigin");
+    res.redirect("/signin");
   })
     .catch((err) => {
       res.redirect(`/signup?message=${err.message}`);
