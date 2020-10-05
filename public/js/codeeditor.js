@@ -24,6 +24,3 @@ function compile(sendSocket) {
 document.body.onkeyup = function() {
   compile(true);
 };
-
-
-compile(false);
