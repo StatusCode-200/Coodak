@@ -7,8 +7,9 @@ exports.getComments = async (req, res) => {
   };
 
 exports.createComments = async (req, res) => {
-    const results = await commentModel.create(req.body);
-    res.status(200).send({ data: results });//shoud not reload or change the page//go do DOM
+    console.log("user", req.user.validUser);
+ ///   const results = await commentModel.create(Object.assing{{user_id: req.validUser} ,req.body);
+  //  res.status(200).send({ data: results });//shoud not reload or change the page//go do DOM
 };
 
 
