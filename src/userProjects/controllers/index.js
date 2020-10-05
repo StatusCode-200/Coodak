@@ -12,7 +12,8 @@ exports.getUserProject = async (req, res) => {
 
 exports.createUserProject = async (req, res) => {
   const results = await Project.create(req.body);
-  res.status(200).send({ data: results });
+  res.redirect("/profile");
+  // res.status(200).send({ data: results });
 };
 
 
