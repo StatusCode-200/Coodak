@@ -9,23 +9,55 @@
 
 <body>
 
-  <form action="/users/5f77602cef04c10bf9618c96/projects" method="POST">
+  <p hidden id="projectId"></p>
 
+  <% if(project !=null){ %>
+  <form action="/users/5f77602cef04c10bf9618c96/projects/<%= project._id %>?_method=PUT" method="POST">
+    <%  }else{  %>
+      <form action="/users/5f77602cef04c10bf9618c96/projects" method="POST">
+        <% } %>
     <textarea id="html" placeholder="HTML" name="code_html"></textarea>
 
     <textarea id="css" placeholder="CSS" name="code_css"></textarea>
     <textarea id="js" placeholder="JavaScript" name="code_js"></textarea>
     <input type="hidden" name="owner_id" value="5f77602cef04c10bf9618c96">
-
+    <label for="name">
+      <input type="text" name="name" id="projectName" value="<%= project ? project.name : null %>" required>
+      <input type="submit" value="save">
+    </label>
   </form>
 
   <iframe id="code"></iframe>
 
-  <label for="name">
-    <input type="text" name="name" id="" required>
-  </label>
+  <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js"></script>
 
-  <input type="submit" value="save">
+  <script>
+  const socket = io("http://localhost:4000/");
+    socket.on('connect', function(data){
+      const projectId = document.getElementById("projectId").value;
+       if(projectId){
+          socket.emit("join", projectId);
+       }
+     });
+
+     socket.on('code', function(code){
+       console.log("receiveCode");
+       const html = code.substring(0, code.indexOf("<style>"));
+       document.getElementById("html").value = html;
+       const css = code.substring(code.indexOf("<style>")+7, code.indexOf("<script>")-8);
+       document.getElementById("css").value = css;
+       const js = code.substring(code.indexOf("<script>") + 8, code.length - 9);
+       document.getElementById("js").value = js;
+       compile(false);
+     });
+
+     socket.on('error', function(data){
+     console.log("error",  data);
+     });
+     socket.on('disconnect', function(){
+     console.log("disconnected");
+    });
+  </script>
 
   <script type="text/javascript" src="/js/codeeditor.js"></script>
   <% if(project !=null){ %>
@@ -33,9 +65,8 @@
     document.getElementById("html").value = ` <%- project.code_html %>`;
     document.getElementById("css").value = `<%- project.code_css %>`;
     document.getElementById("js").value = `<%- project.code_js %>`;
-
-    manipulateIframe();
-    
+    document.getElementById("projectId").value = `<%- project.id %>`;
+    compile(false);
   </script>
   <% } %>
 </body>

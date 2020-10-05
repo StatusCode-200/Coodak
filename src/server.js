@@ -1,3 +1,4 @@
+const http = require("http");
 const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -6,10 +7,16 @@ const usersRouter = require("./users/router");
 const usersProjectsRouter = require("./userProjects/router");
 const usersChallengesRouter = require("./userChallenges/router");
 const challengesRouter = require("./challenges/router");
-const githubOauth = require("./auth/middleware/githubOauth");
+const whiteBoardRouter = require("./whiteBoard/router");
 
+const githubOauth = require("./auth/middleware/githubOauth");
 const googleOauth = require("./auth/middleware/googleOauth");
+const socketHandler = require("./socketHandler");
+
 const app = express();
+const httpServer = http.createServer(app);
+const io = require("socket.io")(httpServer);
+socketHandler(io);
 
 app.use(express.static("./public"));
 app.use(express.urlencoded({ extended: true }));
@@ -73,6 +80,9 @@ app.use("/users", usersRouter);
 app.use("/users", usersProjectsRouter);
 app.use("/users", usersChallengesRouter);
 app.use("/challenges", challengesRouter);
+app.use("/whiteboard", whiteBoardRouter);
+
+
 
 app.get("/oauth", googleOauth, (req, res) => {
   res.status(200).redirect("/");
@@ -98,7 +108,7 @@ const PORT = process.env.PORT || 3000;
 module.exports = {
   server: app,
   start: () => {
-    app.listen(PORT, () => {
+    httpServer.listen(PORT, () => {
       console.log(`server started - ${PORT}`);
     });
   },

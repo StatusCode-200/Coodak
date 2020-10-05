@@ -1,41 +1,26 @@
-function compile() {
+/* eslint-disable no-undef */
+
+// firsTime when someone open the project from database, don't publish it, maybe the other add another thing
+function compile(sendSocket) {
   var html = document.getElementById("html");
   var css = document.getElementById("css");
   var js = document.getElementById("js");
   var code = document.getElementById("code").contentWindow.document;
 
-  document.body.onkeyup = function() {
-    code.open();
-    code.writeln(
-      html.value +
-        "<style>" +
-        css.value +
-        "</style>" +
-        "<script>" +
-        js.value +
-        "</script>"
-    );
-    code.close();
-  };
-}
-
-compile();
-
-function manipulateIframe(){
-  let html = document.getElementById("html");
-  let css = document.getElementById("css");
-  let js = document.getElementById("js");
-  let code = document.getElementById("code").contentWindow.document;
-
   code.open();
-    code.writeln(
-      html.value +
+  const newCode =
+        html.value +
         "<style>" +
         css.value +
         "</style>" +
         "<script>" +
         js.value +
-        "</script>"
-    );
-    code.close();
+        "</script>";
+  code.writeln(newCode);
+  code.close();
+  sendSocket && socket.emit("code", { projectId: projectId.value, code: newCode });
 }
+
+document.body.onkeyup = function() {
+  compile(true);
+};
