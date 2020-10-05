@@ -11,10 +11,10 @@
 <body>
   <main>
     <h2 id="titleW">Whiteboard</h2>
-    <% if (whiteboard){  %>
-    <form action="/:whiteboardId/whiteboard?_method=PUT" method="POST">
+    <% if(whiteboard) {  %>
+    <form action="/<%= whiteboard._id %>/whiteboard?_method=PUT" method="POST">
       <%  }else{  %>
-      <form action="/:savedChallengeId/whiteboard" method="POST">
+      <form action="/<%= savedChallengeId %>/whiteboard" method="POST">
         <% } %>
         <input type="hidden" name="user_challenge_id" value="<%= savedChallengeId %>">
         <div class="grid-container">
@@ -25,10 +25,10 @@
             </textarea>
             <br />
             <label for="input">Input </label>
-            <input name="input" id="input" type="text" value="<%= whiteboard? whiteboard.input %>" />
+            <input name="input" id="input" type="text" value="<%= whiteboard? whiteboard.input : null %>" />
             <br />
             <label for="output">Output </label>
-            <input name="output" id="output" type="text" value="<%= whiteboard? whiteboard.output %>" />
+            <input name="output" id="output" type="text" value="<%= whiteboard? whiteboard.output : null %>" />
           </div>
 
           <div class="grid-item">

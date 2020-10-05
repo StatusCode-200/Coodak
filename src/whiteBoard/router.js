@@ -4,14 +4,13 @@ const aclPermission = require("../auth/middleware/acl");
 
 const whiteBoardController = require("./controllers");
 
-router.get("/",bearerAuth, aclPermission('users','read'), whiteBoardController.listWhiteBoardChallenge);
 //render saved whiteboard in whiteboard page by the saved user challenge id
-router.get("/:savedChallengeId/whiteboard",bearerAuth, aclPermission('userChallenges','read'), whiteBoardController.getWhiteBoardChallenge);
+router.get("/:savedChallengeId/whiteboard",bearerAuth, aclPermission('userChallenges','read'), whiteBoardController.getUserWhiteBoard);
 //post saved whiteboard in whiteboard page by the saved user challenge id
-router.post("/:savedChallengeId/whiteboard",bearerAuth, aclPermission('userChallenges','create'), whiteBoardController.createWhiteBoardChallenge);
+router.post("/:savedChallengeId/whiteboard",bearerAuth, aclPermission('userChallenges','create'), whiteBoardController.createUserWhiteBoard);
 //update whiteboard by its id
-router.put("/:whiteboardId/whiteboard",bearerAuth, aclPermission('userChallenges','update'), whiteBoardController.updateWhiteBoardChallenge);
+router.put("/:whiteboardId/whiteboard",bearerAuth, aclPermission('userChallenges','update'), whiteBoardController.updateWhiteBoard);
 //delete whiteboard by its id
-router.delete("/:whiteboardId/whiteboard",bearerAuth, aclPermission('userChallenges','delete'), whiteBoardController.deleteWhiteBoardChallenge);
+router.delete("/:whiteboardId/whiteboard",bearerAuth, aclPermission('userChallenges','delete'), whiteBoardController.deleteWhiteBoard);
 
 module.exports = router;
