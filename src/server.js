@@ -7,6 +7,7 @@ const usersRouter = require("./users/router");
 const usersProjectsRouter = require("./userProjects/router");
 const usersChallengesRouter = require("./userChallenges/router");
 const challengesRouter = require("./challenges/router");
+const commentsRouter = require("./challengeComment/router");
 const githubOauth = require("./auth/middleware/githubOauth");
 const googleOauth = require("./auth/middleware/googleOauth");
 const socketHandler = require("./socketHandler");
@@ -78,6 +79,7 @@ app.use("/users", usersRouter);
 app.use("/users", usersProjectsRouter);
 app.use("/users", usersChallengesRouter);
 app.use("/challenges", challengesRouter);
+app.use("/challenges", commentsRouter);
 
 app.get("/oauth", googleOauth, (req, res) => {
   res.status(200).redirect("/");
