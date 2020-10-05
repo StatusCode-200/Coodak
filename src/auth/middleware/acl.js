@@ -2,7 +2,7 @@
 const users = require('../../users/model/userModel');
 module.exports = (resource ,action) => {
   return (req, res, next) => {
-    console.log('=====>>>>>>',req.user.validUser);
+    // console.log('=====>>>>>>',req.user.validUser);
 
     try {
       if (users.rolesUsers(req.user.validUser.role, resource , action)) {
