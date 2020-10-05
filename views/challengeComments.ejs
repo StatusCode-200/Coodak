@@ -49,20 +49,26 @@
     </script> -->
     <script>
  var postComment = document.getElementById('commentBtn');
- var text = document.getElementById("commentText").value;//textarea text
-
  postComment.addEventListener("click", (event)=>{
+    var text = document.getElementById("commentText").value;//textarea text
+     console.log(text);
            event.preventDefault();
-           fetch("/challenges/<%= challengeId %>/comments",{method:"post",body:{comment:text}}).then(res => res.json()).then(response => {
+           fetch("/challenges/<%= challengeId %>/comments",{method:"post",headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ comment: text })}).then(res => res.json()).then(response => {
             console.log(response);
-
-        //     let newCommentDiv=document.createElement("div");
-        //    newCommentDiv.className="commentContainer";
-        //    let newCommentP = document.createElement("p");
-        //    newCommentP.textContent = response;
-        //    newCommentDiv.appendChild(newCommentP);
-        //    allCommentsSection.appendChild(newCommentDiv);
         });
+        let allCommentsSection=document.getElementById("allComments");
+        var text = document.getElementById("commentText").value;//textarea text
+            let newCommentDiv=document.createElement("div");
+           newCommentDiv.className="commentContainer";
+           let newCommentP = document.createElement("p");
+           newCommentP.textContent = text;
+           newCommentDiv.appendChild(newCommentP);
+           allCommentsSection.appendChild(newCommentDiv);
+        
            document.getElementById("commentText").value="";
  });
     </script>

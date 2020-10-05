@@ -7,9 +7,11 @@ exports.getComments = async (req, res) => {
   };
 
 exports.createComments = async (req, res) => {
+  console.log(req.body,"111111111111111111111111111111111");
+  console.log(req.params.challengeId,"111111111111111111111111")
     console.log("user", req.user.validUser);
- ///   const results = await commentModel.create(Object.assing{{user_id: req.validUser} ,req.body);
-  //  res.status(200).send({ data: results });//shoud not reload or change the page//go do DOM
+    const results = await commentModel.create(Object.assign({ user_id: req.user.validUser._id} ,req.body,{ challenge_id:req.params.challengeId}));
+    res.status(200).send({ data: results });//shoud not reload or change the page//go do DOM
 };
 
 
