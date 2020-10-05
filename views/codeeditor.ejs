@@ -37,12 +37,21 @@
     socket.on('connect', function(data){
       const projectId = document.getElementById("projectId").value;
        if(projectId){
-         console.log("projectId", projectId);
+          socket.emit("join", projectId);
        }
      });
-     socket.on('data', function(data){
-     console.log("data",  data);
+
+     socket.on('code', function(code){
+       console.log("receiveCode");
+       const html = code.substring(0, code.indexOf("<style>"));
+       document.getElementById("html").value = html;
+       const css = code.substring(code.indexOf("<style>")+7, code.indexOf("<script>")-8);
+       document.getElementById("css").value = css;
+       const js = code.substring(code.indexOf("<script>") + 8, code.length - 9);
+       document.getElementById("js").value = js;
+       compile(false);
      });
+
      socket.on('error', function(data){
      console.log("error",  data);
      });
@@ -58,9 +67,7 @@
     document.getElementById("css").value = `<%- project.code_css %>`;
     document.getElementById("js").value = `<%- project.code_js %>`;
     document.getElementById("projectId").value = `<%- project.id %>`;
-
-    manipulateIframe();
-
+    compile(false);
   </script>
   <% } %>
 </body>
