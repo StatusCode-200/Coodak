@@ -5,7 +5,7 @@ const whiteBoardModel = require("../model/whiteboardModel");
 exports.getUserWhiteBoard = async (req, res) => {
   const savedChallengeId =  req.params.savedChallengeId;
   const results = await whiteBoardModel.getBySavedChallengeId(savedChallengeId);
-  res.render("whiteboard",{ whiteboard: results, savedChallengeId : savedChallengeId });
+  res.render("whiteboard",{ whiteboard: results[0], savedChallengeId : savedChallengeId });
 };
 
 exports.createUserWhiteBoard = async (req, res) => {
