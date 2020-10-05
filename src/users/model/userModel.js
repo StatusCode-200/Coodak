@@ -90,6 +90,10 @@ class User {
       "challenges": {
         "user": ["read"],
         "admin":  ['read', 'create', 'update', 'delete'],
+      },
+      "userChallenges": {
+        "user":  ['read', 'create', 'update', 'delete'],
+        "admin":  ['read', 'create', 'update', 'delete'],
       }
     }
 

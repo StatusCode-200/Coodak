@@ -11,7 +11,7 @@ router.get("/",bearerAuth, aclPermission('challenges','read'), challengesCtrolle
 router.get("/:challengeId",bearerAuth, aclPermission('challenges','read'), challengesCtroller.getChallenge);
 
 //one challenge page before saving into the user profile
-router.post("/:challengeId/test",bearerAuth, aclPermission('challenges','create'), challengesCtroller.testChallenge);/////send the solution in the body/////
+router.post("/:challengeId/test",bearerAuth, aclPermission('challenges','read'), challengesCtroller.testChallenge);/////send the solution in the body/////
 
 router.post("/",bearerAuth, aclPermission('challenges','create'), challengesCtroller.createChallenge);
 
