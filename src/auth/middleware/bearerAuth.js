@@ -4,15 +4,20 @@ const Users = require("../../users/model/userModel.js");
 
 module.exports = (req, res, next) => {
 
-    const token = (req.headers.authorization ||  req.cookies.token ? "Bearer " + req.cookies.token : null);
-    // console.log("tooook",token);
+
+  console.log("authorization", req.headers.authorization);
+
+  const cookieToken = req.cookies.token ? `Bearer  ${req.cookies.token}` : null;
+
+  const token = (req.headers.authorization || cookieToken);
+  // console.log("tooook",token);
   if (!token)  {
-    
+
     return next("invalid Login , no Header !!");
   }
 
   let bearer = token.split(" ");
-    // console.log('Bareeeeeer>>',bearer);
+    console.log('Bareeeeeer>>',bearer);
   if (bearer[0] == "Bearer") {
     const token = bearer[1];
     // console.log('token>>',token);
