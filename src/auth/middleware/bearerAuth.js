@@ -5,9 +5,9 @@ const Users = require("../../users/model/userModel.js");
 module.exports = (req, res, next) => {
 
 
-  console.log("authorization", req.headers.authorization);
+  const cookieToken = req.cookies.token ? `Bearer ${req.cookies.token}` : null;
 
-  const cookieToken = req.cookies.token ? `Bearer  ${req.cookies.token}` : null;
+  console.log("cookieToken", cookieToken);
 
   const token = (req.headers.authorization || cookieToken);
   // console.log("tooook",token);
@@ -17,7 +17,8 @@ module.exports = (req, res, next) => {
   }
 
   let bearer = token.split(" ");
-    console.log('Bareeeeeer>>',bearer);
+
+  //  console.log('Bareeeeeer>>',bearer);
   if (bearer[0] == "Bearer") {
     const token = bearer[1];
     // console.log('token>>',token);

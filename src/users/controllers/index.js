@@ -23,8 +23,6 @@ exports.singup = async (req, res, next) => {
     return;
   }
   User.create(req.body).then(async(user) => {
-    const token = await User.generateToken(user);
-    res.cookie("token", token);
     res.redirect("/signin");
   })
     .catch((err) => {
@@ -35,6 +33,7 @@ exports.singup = async (req, res, next) => {
 exports.signin = (req, res, next) => {
   if(req.token){
     res.cookie("token", req.token);
+    res.cookie("userId", req.user._id);
     res.redirect("/");
   } else {
     res.redirect(`/signin?message=msg: ${req.error || "Invalid credentials"}`);
