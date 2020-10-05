@@ -7,8 +7,6 @@ module.exports = (req, res, next) => {
 
   const cookieToken = req.cookies.token ? `Bearer ${req.cookies.token}` : null;
 
-  console.log("cookieToken", cookieToken);
-
   const token = (req.headers.authorization || cookieToken);
   // console.log("tooook",token);
   if (!token)  {
