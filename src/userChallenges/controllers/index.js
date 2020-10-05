@@ -13,7 +13,8 @@ exports.getUserChallenge =  async (req, res) => {
 
 exports.createUserChallenge = async (req, res) => {
   const results = await userChallenges.create(req.body);
-  res.status(200).send({ data: results });
+  res.redirect("/profile");
+  // res.status(200).send({ data: results });
 };
 
 exports.updateUserChallenge= async (req, res) => {
