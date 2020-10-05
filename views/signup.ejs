@@ -11,7 +11,7 @@
 
 <body>
     <main>
-        
+
 
         <div class='bold-line'></div>
         <div class='container'>
@@ -21,18 +21,20 @@
               <div class='welcome'>Welcome to Coodak ! </div>
 
               <div class='subtitle'> Before using our services you need to SignUp</div>
-              <div class='input-fields'>
-                <input type='email' placeholder='Email' class='input-line full-width'></input>
-                <input type='password' placeholder='Password' class='input-line full-width'></input>
-              </div>
-              
-              <div><button class='ghost-round full-width'> Create Account </button></div>
+              <form method="post" action="/users/signup">
+                <input required type='text' name="username"  placeholder='Username' class='input-line full-width'></input>
+                <input required type='email' placeholder='Email' class='input-line full-width'></input>
+                <input required type='password' name="password" placeholder='Password' class='input-line full-width'></input>
+                <input required type='password' placeholder='Confirm Password' class='input-line full-width'></input>
+
+              <div><button type="submit" class='ghost-round full-width'> Create Account </button></div>
+              <form>
             </div>
           </div>
         </div>
 
     </main>
- 
+
 
 
 </body>

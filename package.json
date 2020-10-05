@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js --ignore 'tests/**/*.js' --ignore README"
   },
   "repository": {
     "type": "git",

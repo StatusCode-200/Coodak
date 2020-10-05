@@ -56,11 +56,11 @@
                 document.getElementById("user-info").appendChild(userSection);
             });
             //get user challenges
-            fetch("http://localhost:4000/users/5f77602cef04c10bf9618c96/userchallenges", { method: "get" }).then(res => res.json()).then(response => {
+            fetch("http://localhost:4000/users/5f77602cef04c10bf9618c96/challenges", { method: "get" }).then(res => res.json()).then(response => {
                 console.log(response);
                 response.data.forEach((challenge, i) => {
                     let userChallenge = document.createElement("div");
-                    userChallenge.innerHTML = `<a href="http://localhost:4000/users/${challenge.user_id}/userchallenges/${challenge._id}">${challenge.challenge_id}</a>`;
+                    userChallenge.innerHTML = `<a href="http://localhost:4000/users/${challenge.user_id}/challenges/${challenge._id}">${challenge.challenge_id.name}</a>`;//added .name
                     document.getElementById("user-challenges").appendChild(userChallenge);
                 });
 

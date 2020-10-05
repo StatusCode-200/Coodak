@@ -16,7 +16,7 @@
         <a href="#" id="oauthGoogle" class="google btn"><i class="fa fa-google fa-fw">
         </i> Login with Google+
         </a> -->
-       
+
 
         <div class='bold-line'></div>
         <div class='container'>
@@ -27,20 +27,24 @@
 
               <div class='subtitle'> Before using our services you need to SignIn</div>
               <div class='input-fields'>
-                <input type='email' placeholder='Email' class='input-line full-width'></input>
-                <input type='password' placeholder='Password' class='input-line full-width'></input>
-        
+                <form method="post" action="/users/signin">
+                  <input required="true" type='text' placeholder='username' name="username"  class='input-line full-width'></input>
+                  <input required="true" type='password' placeholder='password' name="pass" class='input-line full-width'></input>
+                  <br/>
+                  <br/>
+                  <div><button type="submit" class='ghost-round full-width'> Login</button></div>
+                </form>
+
               </div>
-              <div class='spacing'> <h3>Or continue with</h3> 
+              <div class='spacing'> <h3>Or continue with</h3>
                   <br>
-            
+
                  <!-- <span id="oauth" class='highlight'> Login with GitHub <i class="fab fa-github"></i></span> -->
                  <a id="oauth" href="#" > GitHub <i class="fab fa-github"></i></a>
-                
+
                   <a href="#" id="oauthGoogle" class="google btn"> Google+ <i class="fa fa-google fa-fw"> </i></a>
                 <!-- <span id="oauthGoogle" class='highlight'>Login with Google+ <i class="fab fa-google-plus-g"></i> </span> -->
             </div>
-              <div><button class='ghost-round full-width'> Login</button></div>
             </div>
           </div>
         </div>
