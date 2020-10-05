@@ -16,21 +16,24 @@
 
             <div id="challenge-description">
                 <div><a href="/challenges/<%= challenge._id %>/comments">Forum</a></div>
+                <% if (solution){  %>
+                    <div><a href="/challenges/<%= savedChallengeId %>/whiteboard">Whiteboard</a></div>
+                    <% } %>
                 <p><%= challenge.description %></p>
             </div>
 
             <div id="work-area">
                 <!-- save challenge to user profile -->
                 <% if (solution){  %>
-                    <form id="saveChallenge" action="/users/5f77602cef04c10bf9618c96/challenges/<%= challenge._id %>?_method=PUT" method="POST">
+                    <form id="saveChallenge" action="/users/<%= userID %>/challenges/<%= challenge._id %>?_method=PUT" method="POST">
 
                <%  }else{  %>
-                <form id="saveChallenge" action="/users/5f77602cef04c10bf9618c96/challenges" method="POST">
+                <form id="saveChallenge" action="/users/<%= userID %>/challenges" method="POST">
                 <% } %>
                     <textarea name="solution" id="userSolution" cols="70" rows="40">
                     <%= solution? solution : challenge.starter_code %>
                 </textarea>
-                    <input id="inputUser_id" type="hidden" name="user_id" value="5f77602cef04c10bf9618c96">
+                    <input id="inputUser_id" type="hidden" name="user_id" value="<%= userID %>">
                     <input id="inputChallenge_id" type="hidden" name="challenge_id" value= <%= challenge._id %> >
                     <input type="submit" value="save">
 

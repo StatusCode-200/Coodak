@@ -82,7 +82,7 @@ app.use("/users", usersProjectsRouter);
 app.use("/users", usersChallengesRouter);
 app.use("/challenges", challengesRouter);
 app.use("/challenges", commentsRouter);
-app.use("/whiteboard", whiteBoardRouter);
+app.use("/challenges", whiteBoardRouter);
 
 
 

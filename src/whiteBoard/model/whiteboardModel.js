@@ -12,6 +12,10 @@ class WhiteBoard {
     return  await user_challenge_id ? this.schema.find({user_challenge_id:user_challenge_id}) :this.schema.find();
   }
 
+  async getBySavedChallengeId(savedChallengeId) {
+    return  await this.schema.find({user_challenge_id : savedChallengeId});
+  }
+
   async getById(id) {
     return await this.schema.findOne({_id:id});
   }
@@ -21,16 +25,16 @@ class WhiteBoard {
     return newRecord.save();
   }
 
-  update(user_challenge_id, record){
-    return this.schema.findOneAndUpdate({user_challenge_id},record, { new: true });
+  update(_id, record){
+    return this.schema.findOneAndUpdate({_id},record, { new: true });
   }
 
   patch(user_challenge_id, record){
     return this.schema.findOneAndUpdate({user_challenge_id},record, { new: true });
   }
 
-  delete(user_challenge_id){
-    return this.schema.deleteOne({user_challenge_id:user_challenge_id});
+  delete(_id){
+    return this.schema.deleteOne({_id:_id});
   }
 
 }
