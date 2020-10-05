@@ -17,7 +17,7 @@ const usersContoller = require("./controllers");
 //     res.status(200).send('DELETED !!!! ');
 //   });
 
-router.get("/", bearerAuth, aclPermission('users','list'), usersContoller.listUsers);
+router.get("/", bearerAuth, aclPermission('users','read'), usersContoller.listUsers);
 
 router.get("/secret", usersContoller.getSecret);
 
