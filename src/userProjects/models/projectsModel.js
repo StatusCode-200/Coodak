@@ -17,8 +17,8 @@ class Projects {
     return newRecord.save();
   }
 
-  update(userName, record){
-    return this.schema.findOneAndUpdate({userName},record, { new: true });
+  update(projectId, record){
+    return this.schema.findOneAndUpdate({_id : projectId},record, { new: true });
   }
 
   patch(userName, record){

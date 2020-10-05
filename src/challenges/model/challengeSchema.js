@@ -8,6 +8,7 @@ const challengeSchema = mongoose.Schema({
   category : {type : String},
   starter_code : {type : String},
   test : {type : String , required: true},
+  comments : {type : Array},
 });
 
 module.exports = mongoose.model("challenges", challengeSchema);
