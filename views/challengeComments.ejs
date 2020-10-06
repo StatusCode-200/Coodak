@@ -12,6 +12,7 @@
         <section id="allComments">
             <% if(comments.length>0){comments.forEach((comment, i) => { %>
             <div class="commentContainer">
+                <p><%= comment.user_id.username || "anonymous" %></p>
                 <p><%= comment.comment%></p>
             </div>
             <% })}else{ %>
@@ -25,7 +26,7 @@
                     <!-- <input type="hidden" name="challenge_id" value="<%= challengeId %>"> -->
                     <!-- <input id="commentBtn" type="submit" value="comment"> -->
                     <button id="commentBtn">comment</button>
-                </form>
+                <!-- </form> -->
             </div>
         
     </main>
@@ -64,6 +65,12 @@
         var text = document.getElementById("commentText").value;//textarea text
             let newCommentDiv=document.createElement("div");
            newCommentDiv.className="commentContainer";
+
+           let newCommenUsername = document.createElement("p");
+           newCommenUsername.textContent =`<%= username %>`;
+           newCommentDiv.appendChild(newCommenUsername);
+
+
            let newCommentP = document.createElement("p");
            newCommentP.textContent = text;
            newCommentDiv.appendChild(newCommentP);
