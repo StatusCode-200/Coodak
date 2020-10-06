@@ -1,31 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>challenges</title>
+    <link rel="stylesheet" href="/styles/challenges.css" />
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <header>
-
-    </header>
+  <body>
+    <header></header>
     <main>
-        <%= challenges.length %>
+      <div class="wrapper">
+
         <section id="all-challenges">
-            <% challenges.forEach((challenge, i) => { %>
-            <div class="one-challenge">
-                <h2><%= challenge.name %></h2>
-                <p><%= challenge.summary %></p>
-        <a href="challenges/<%=challenge._id %>">start</a>
+
+            <div class="linkDiv">
+                <a href="/addChallenge">
+                  <span class="thin"></span><span class="thick">ADD CHALLENGE</span>
+                </a>
+              </div>
+
+          <% challenges.forEach((challenge, i) => { %>
+
+       
+
+          <div class="one-challenge">
+            <h3 class="challengeName">
+              CHALLENGE NAME :
+              <p><%= challenge.name %></p>
+            </h3>
+            <h3 class="challengeS">
+              CHALLENGE SUMMARY :
+              <p><%= challenge.summary %></p>
+            </h3>
+
+            <!-- <a href="challenges/<%=challenge._id %>">start</a> -->
+
+            <div class="linkDiv">
+              <a href="/addChallenge">
+                <!-- <span class="thin"></span><span class="thick">ADD CHALLENGE</span> -->
+                <a href="challenges/<%=challenge._id %>">start</a>
+              </a>
             </div>
-            <% }) %>
+          </div>
+<hr>
+          <% }) %>
         </section>
+      </div>
     </main>
-    <footer>
-
-    </footer>
-</body>
-
+    <footer></footer>
+  </body>
 </html>
