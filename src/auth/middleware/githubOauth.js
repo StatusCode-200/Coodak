@@ -20,6 +20,8 @@ module.exports = async function authorize(req, res, next) {
     let remoteUser = await getRemoteUserInfo(remoteToken);
     console.log("(3) GITHUB USER", remoteUser);
     let [user, token] = await getUser(remoteUser);
+    
+
     req.user = user;
     req.token = token;
     console.log("(4) LOCAL USER", user);
@@ -52,7 +54,24 @@ async function getUser(remoteUser) {
   };
 
   let userRecord = new users(Record);
-  let user = await userRecord.save();
+   userRecord ={
+    role: userRecord.role,
+    username: userRecord.username,
+    password: userRecord.password
+   };
+  // let user = await userRecord.save();
+  console.log("-----------------------------");
+    console.log(userRecord);
+    console.log("-----------------------------");
+   await users.updateOne(
+    { username: remoteUser.login },
+    { $set: userRecord },
+    { upsert: true }, // If set to true, creates a new document when no document matches the query criteria
+  );
+  let user = await users.findOne({  username: remoteUser.login });
+  console.log("-----------------------------");
+    console.log(user);
+    console.log("-----------------------------");
   let token = await Users.generateToken(user);
   return [user, token];
 }

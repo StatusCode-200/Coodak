@@ -71,7 +71,21 @@ async function getUser(remoteUser) {
   // const user = await users.save(userRecord);
   // const token = users.generateToken(user);
   let userRecord = new users(record);
-  let user = await userRecord.save();
+  userRecord ={
+    role: userRecord.role,
+    username: userRecord.username,
+    password: userRecord.password
+   };
+  // let user = await userRecord.save();
+  console.log("-----------------------------");
+    console.log(userRecord);
+    console.log("-----------------------------");
+  await users.updateOne(
+    { username: remoteUser.login },
+    { $set: userRecord },
+    { upsert: true }, // If set to true, creates a new document when no document matches the query criteria
+  );
+  let user = await users.findOne({  username: remoteUser.login });
   let token = await Users.generateToken(user);
   return [user, token];
 }
