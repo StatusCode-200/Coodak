@@ -8,7 +8,7 @@ const {
   CLIENT_SECRET2,
 } = process.env;
 
-const API_SERVER = "http://localhost:4000/oauth";
+const API_SERVER = process.env.API_SERVER;
 
 module.exports = async function (req, res, next) {
   try {

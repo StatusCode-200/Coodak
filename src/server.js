@@ -97,6 +97,7 @@ app.get("/oauth", googleOauth, (req, res) => {
 
 // Routes
 app.get("/oauth2", githubOauth, (req, res) => {
+  res.cookie("token", req.token);
   res.status(200).redirect("/");
 });
 
