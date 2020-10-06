@@ -7,7 +7,7 @@ exports.listUserProject = async (req, res) => {
 
 exports.getUserProject = async (req, res) => {
   const results = await Project.getById(req.params.projectId);
-  res.render("codeeditor",{project: results});
+  res.render("codeeditor",{project: results, userId : req.user.validUser._id});
 };
 
 exports.createUserProject = async (req, res) => {

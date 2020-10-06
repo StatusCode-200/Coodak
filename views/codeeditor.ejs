@@ -12,18 +12,22 @@
   <p hidden id="projectId"></p>
 
   <% if(project !=null){ %>
-  <form action="/users/5f77602cef04c10bf9618c96/projects/<%= project._id %>?_method=PUT" method="POST">
-    <%  }else{  %>
-      <form action="/users/5f77602cef04c10bf9618c96/projects" method="POST">
+  <form action="/users/<%= userId %>/projects/<%= project._id %>?_method=PUT" method="POST">
+    <%  }else if(userId != null){  %>
+      <form action="/users/<%= userId %>/projects" method="POST">
+        <% }else{ %>
+          <form action="#" method="POST">
         <% } %>
     <textarea id="html" placeholder="HTML" name="code_html"></textarea>
 
     <textarea id="css" placeholder="CSS" name="code_css"></textarea>
     <textarea id="js" placeholder="JavaScript" name="code_js"></textarea>
-    <input type="hidden" name="owner_id" value="5f77602cef04c10bf9618c96">
+    <input type="hidden" name="owner_id" value="<%= userId %>">
     <label for="name">
       <input type="text" name="name" id="projectName" value="<%= project ? project.name : null %>" required>
+      <% if(userId !=null){ %>
       <input type="submit" value="save">
+      <% } %>
     </label>
   </form>
 
