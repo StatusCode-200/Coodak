@@ -91,11 +91,15 @@ app.use("/challenges", commentsRouter);
 
 
 app.get("/oauth", googleOauth, (req, res) => {
+  res.cookie("token", req.token);
+  res.cookie("userId", req.user._id);
   res.status(200).redirect("/");
 });
 
 // Routes
 app.get("/oauth2", githubOauth, (req, res) => {
+  res.cookie("token", req.token);
+  res.cookie("userId", req.user._id);
   res.status(200).redirect("/");
 });
 
