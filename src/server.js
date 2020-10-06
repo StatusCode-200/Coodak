@@ -12,6 +12,7 @@ const whiteBoardRouter = require("./whiteBoard/router");
 
 const bearerAuth = require("./auth/middleware/bearerAuth.js");
 const aclPermission = require("./auth/middleware/acl");
+const optionalAuth = require("./auth/middleware/optionalAuth");
 
 const githubOauth = require("./auth/middleware/githubOauth");
 const googleOauth = require("./auth/middleware/googleOauth");
@@ -55,8 +56,8 @@ app.all("*", (req, res, next) => {
 });
 
 // page not found middleware
-app.get("/", (req, res) => {
-  res.status(200).render("index");
+app.get("/", optionalAuth, (req, res) => {
+  res.status(200).render("index" , { userId : req.user? req.user.validUser._id : null});
 });
 
 app.get("/signin", (req, res) => {
@@ -68,8 +69,8 @@ app.get("/signup", (req, res) => {
 });
 
 
-app.get("/codeeditor", (req,res)=>{
-  res.render("codeeditor",{project: null});
+app.get("/codeeditor",optionalAuth, (req,res)=>{
+  res.render("codeeditor",{project: null, userId : req.user? req.user.validUser._id : null});
 });
 
 app.get("/profile",bearerAuth, (req,res)=>{
