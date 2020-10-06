@@ -75,6 +75,10 @@
     console.log(">>>> auth ", authURL);
     let link = document.getElementById("oauth");
     link.setAttribute("href", authURL);
+    // console.log("document.location.hostname",document.location.hostname)
+    // console.log("document.location.href",document.location.href)
+    // console.log("document.location.origin",document.location.origin)
+
   </script>
 
   <script>
@@ -82,9 +86,8 @@
 
     let googleOptions = {
       response_type: "code",
-      client_id:
-        "425927941032-6o1spfk58qsfo8fdfrka1ang198ahimd.apps.googleusercontent.com",
-      redirect_uri: `${document.location.origin}/oauth`,
+      client_id: document.location.origin.includes("localhost") ? "425927941032-6o1spfk58qsfo8fdfrka1ang198ahimd.apps.googleusercontent.com" : "119702569642-m6aiji66l3acdhl81jsvf31no84tfa0d.apps.googleusercontent.com",
+      redirect_uri: `${document.location.origin}/oauth `,
       scope: "openid email profile",
       state: `${document.location.hostname}`,
       access_type: "offline",
