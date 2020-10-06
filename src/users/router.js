@@ -4,18 +4,6 @@ const bearerAuth = require("../auth/middleware/bearerAuth.js");
 const aclPermission = require("../auth/middleware/acl");
 const usersContoller = require("./controllers");
 
-// router.get('/read', bearerAuth, aclPermission('read'), (req, res) => {
-//     res.status(200).send('user get !! !!!! ');
-//   });
-//   router.post('/add', bearerAuth, aclPermission('create'), (req, res) => {
-//     res.status(200).send('user-submission !!!! ');
-//   });
-//   router.put('/change', bearerAuth, aclPermission('update'), (req, res) => {
-//     res.status(200).send('put user !!!! ');
-//   });
-//   router.delete('/remove', bearerAuth, aclPermission('delete'), (req, res) => {
-//     res.status(200).send('DELETED !!!! ');
-//   });
 
 router.get("/", bearerAuth, aclPermission('users','read'), usersContoller.listUsers);
 
@@ -29,6 +17,9 @@ router.post("/signup",usersContoller.singup);
 
 router.post("/signin", basicAuth ,usersContoller.signin);
 
+router.put("/:userId",bearerAuth, aclPermission('users','update'), usersContoller.updateUser);
+
+router.delete("/:userId",bearerAuth, aclPermission('users','delete'), usersContoller.deleteUser);
 
 
 module.exports = router;

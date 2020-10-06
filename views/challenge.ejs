@@ -16,6 +16,10 @@
 
             <div id="challenge-description">
                 <div><a href="/challenges/<%= challenge._id %>/comments">Forum</a></div>
+                <% if (solution){  %>
+                    <div><a href="/challenges/<%= challenge._id %>/whiteboard">whiteboard</a></div>
+                  <% } %>
+                  
                 <p><%= challenge.description %></p>
             </div>
 

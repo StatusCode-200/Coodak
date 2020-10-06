@@ -15,6 +15,17 @@ exports.createUser = async (req, res) => {
   res.status(200).send({ data: results });
 };
 
+exports.deleteUser = async (req, res) => {
+  const results = await User.delete(req.params.userId);
+  res.status(200).send({ data: results });
+};
+
+
+exports.updateUser = async (req, res) => {
+  const results = await User.update(req.params.userId , req.body);
+  res.status(200).send({ data: results });
+};
+
 exports.singup = async (req, res, next) => {
   const username = req.body.username;
   let isUserExist = await User.get(username);
