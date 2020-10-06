@@ -8,17 +8,36 @@
 </head>
 
 <body>
-  <form action="/challenges" method="POST">
-    <textarea id="description" placeholder="challenge description" name="description" required></textarea>
-    <textarea id="summary" placeholder="challenge summary" name="summary" required></textarea>
-    <textarea id="starter_code" placeholder="starter code" name="starter_code" required></textarea>
-    <textarea id="test" placeholder="challenge test" name="test" required></textarea>
 
-    <label for="">challenge name<input type="text" name="name" id="challengeName" required></label>
+  <div class="wrapper">
+
+
+  <form action="/challenges" method="POST">
+    <textarea id="description" placeholder="challenge description" name="description" required cols="30" rows="10"></textarea>
+
+    <textarea id="summary" placeholder="challenge summary" name="summary" required cols="30" rows="10"></textarea>
+    <textarea id="starter_code" placeholder="starter code" name="starter_code" required cols="30" rows="10"></textarea>
+    <textarea id="test" placeholder="challenge test" name="test" required cols="30" rows="10"></textarea>
+<br />
+<br />
+<br />
+
+<br />
+
+
+    <label for="">challenge name : </label> 
+    <br>
+    <br>
+
+     <input type="text" name="name" id="challengeName" required>
+     <br>
+    <br>
+
     <input type="submit" value="save">
   </form>
 
 
+</div>
 
 
   <!-- <script type="text/javascript" src="/js/addChallenge.js"></script> -->

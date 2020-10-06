@@ -14,8 +14,17 @@
           <li class="menu-item"><a href="/challenges">challenges</a></li>
           <li class="menu-item"><a href="/codeeditor">editor</a></li>
           <li class="menu-item"><a href="/about">about Us</a></li>
+          <% if(userId == null ) { %>
+
           <li class="menu-item"><a href="/signup">signup</a></li>
           <li class="menu-item"><a href="/signin">signin</a></li>
+         <% } %>
+          
+          <% if(userId !== null ) { %>
+            <li class="menu-item"><a href="/profile">profile</a></li>
+
+         <% } %>
+
           
         </ol>
       </nav>
