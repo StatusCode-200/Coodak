@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+    </header>
+    <main>
+
+        <section id="started-challenge">
+
+            <div id="challenge-description">
+                <div><a href="/challenges/<%= challenge._id %>/comments">Forum</a></div>
+                <% if (solution){  %>
+                    <div><a href="/challenges/<%= savedChallengeId %>/whiteboard">Whiteboard</a></div>
+                    <% } %>
+                <p><%= challenge.description %></p>
+            </div>
+
+            <div id="work-area">
+                <!-- save challenge to user profile -->
+                <% if (solution){  %>
+                    <form id="saveChallenge" action="/users/<%= userId %>/challenges/<%= challenge._id %>?_method=PUT" method="POST">
+
+               <%  }else{  %>
+                <form id="saveChallenge" action="/users/<%= userId %>/challenges" method="POST">
+                <% } %>
+                    <textarea name="solution" id="userSolution" cols="70" rows="40">
+                    <%= solution? solution : challenge.starter_code %>
+                </textarea>
+                    <input id="inputUser_id" type="hidden" name="user_id" value="<%= userId %>">
+                    <input id="inputChallenge_id" type="hidden" name="challenge_id" value= <%= challenge._id %> >
+                    <input type="submit" value="save">
+
+                </form>
+                <button onclick="checkResult()">check</button>
+            </div>
+
+        </section>
+
+
+        <section id="results">
+            <div id="result-failed-cases"></div>
+            <div id="result-passed-cases"></div>
+        </section>
+
+
+
+    </main>
+    <footer>
+    </footer>
+    <!--  <script src="/js/challenge.js"></script> -->
+    <script>
+        function checkResult() {
+            let data = document.getElementById("userSolution").value;
+            console.log("data", data);
+            fetch("http://localhost:4000/challenges/<%= challenge._id %>/test", {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ solution: data })
+            })
+                .then(res => res.json()).then(response => {
+                    console.log(response);
+                    document.getElementById('result-failed-cases').innerText = response.result.stderr;
+                    document.getElementById('result-passed-cases').innerText = response.result.stdout;
+                }).catch((err) => {
+                  console.log(err.message);
+                })
+        }
+
+
+    </script>
+</body>
+
+</html>

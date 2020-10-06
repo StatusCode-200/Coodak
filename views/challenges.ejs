@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <main>
+        <%= challenges.length %>
+        <section id="all-challenges">
+            <% challenges.forEach((challenge, i) => { %>
+            <div class="one-challenge">
+                <h2><%= challenge.name %></h2>
+                <p><%= challenge.summary %></p>
+        <a href="challenges/<%=challenge._id %>">start</a>
+            </div>
+            <% }) %>
+        </section>
+    </main>
+    <footer>
+
+    </footer>
+</body>
+
+</html>
