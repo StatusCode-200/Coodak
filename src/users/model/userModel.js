@@ -77,8 +77,8 @@ class User {
     return this.schema.findOneAndUpdate({ userName }, record, { new: true });
   }
 
-  delete(userName) {
-    return this.schema.deleteOne({ userName: userName });
+  delete(_id) {
+    return this.schema.deleteOne({ _id: _id });
   }
 // resource is either usres or challenges 
   rolesUsers(role, resource, ability) {
