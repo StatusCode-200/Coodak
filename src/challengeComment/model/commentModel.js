@@ -9,7 +9,7 @@ class ChallengeComment {
   }
 
   async getByChallengeId(challengeId) {
-    return  await this.schema.find({challenge_id : challengeId});
+    return  await this.schema.find({challenge_id : challengeId}).populate("user_id").exec();
   }
 
   create(record) {
