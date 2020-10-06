@@ -22,9 +22,9 @@ class UserChallenge {
     return this.schema.findOneAndUpdate({user_id},record, { new: true });
   }
 
-  patch(user_id, record){
-    return this.schema.findOneAndUpdate({user_id},record, { new: true });
-  }
+  // patch(user_id, record){
+  //   return this.schema.findOneAndUpdate({user_id},record, { new: true });
+  // }
 
   delete(user_id,challenge_id){
     return this.schema.deleteOne({user_id:user_id,challenge_id:challenge_id});

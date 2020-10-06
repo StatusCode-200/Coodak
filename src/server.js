@@ -6,9 +6,9 @@ const cookieParser = require("cookie-parser");
 const usersRouter = require("./users/router");
 const usersProjectsRouter = require("./userProjects/router");
 const usersChallengesRouter = require("./userChallenges/router");
+const usersChallengeWhiteboardRouter = require("./whiteBoard/router");
 const challengesRouter = require("./challenges/router");
 const commentsRouter = require("./challengeComment/router");
-const whiteBoardRouter = require("./whiteBoard/router");
 
 const bearerAuth = require("./auth/middleware/bearerAuth.js");
 const aclPermission = require("./auth/middleware/acl");
@@ -84,9 +84,9 @@ app.get("/addChallenge", (req,res)=>{
 app.use("/users", usersRouter);
 app.use("/users", usersProjectsRouter);
 app.use("/users", usersChallengesRouter);
+app.use("/users", usersChallengeWhiteboardRouter);
 app.use("/challenges", challengesRouter);
 app.use("/challenges", commentsRouter);
-app.use("/challenges", whiteBoardRouter);
 
 
 

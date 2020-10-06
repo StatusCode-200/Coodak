@@ -17,9 +17,9 @@ class Challenges {
     return this.schema.findOneAndUpdate({_id},record, { new: true });
   }
 
-  patch(_id, record){
-    return this.schema.findOneAndUpdate({_id},record, { new: true });
-  }
+  // patch(_id, record){
+  //   return this.schema.findOneAndUpdate({_id},record, { new: true });
+  // }
 
   delete(_id){
     return this.schema.deleteOne({_id:_id});

@@ -21,13 +21,13 @@ class Projects {
     return this.schema.findOneAndUpdate({_id : projectId},record, { new: true });
   }
 
-  patch(userName, record){
-    return this.schema.findOneAndUpdate({userName},record, { new: true });
-  }
-
-  delete(userName){
-    return this.schema.deleteOne({userName:userName});
-  }
+  // patch(userName, record){
+  //   return this.schema.findOneAndUpdate({userName},record, { new: true });
+  // }
+  //
+  // delete(userName){
+  //   return this.schema.deleteOne({userName:userName});
+  // }
 }
 
 

@@ -7,6 +7,11 @@ exports.listChallenges = async (req, res) => {
   res.render("challenges",{challenges: results});
 };
 
+exports.listChallengesJson = async (req, res) => {
+  const results = await challengeModel.get();
+  res.status(200).send({ data: results });
+};
+
 exports.getChallenge = async (req, res) => {
   const challengeId =  req.params.challengeId;
   const results = await challengeModel.get(challengeId);
