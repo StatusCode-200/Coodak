@@ -61,8 +61,8 @@
   <script>
     let URL = "https://github.com/login/oauth/authorize";
     let options = {
-      client_id: "d3c0c39f87fedf5a33c8",
-      redirect_uri: "http://localhost:4000/oauth2",
+      client_id: document.location.origin.includes("localhost") ? "d3c0c39f87fedf5a33c8" : "f9f24fcbf3cf9a8ff233",
+      redirect_uri: `${document.location.origin}/oauth2`,
       scope: "read:email",
       state: "asldfjdfs",
     };
@@ -84,9 +84,9 @@
       response_type: "code",
       client_id:
         "425927941032-6o1spfk58qsfo8fdfrka1ang198ahimd.apps.googleusercontent.com",
-      redirect_uri: "http://localhost:4000/oauth",
+      redirect_uri: `${document.location.origin}/oauth`,
       scope: "openid email profile",
-      state: "http://localhost",
+      state: `${document.location.hostname}`,
       access_type: "offline",
     };
 
