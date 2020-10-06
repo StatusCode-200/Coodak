@@ -1,0 +1,14 @@
+
+body { 
+    background-color: #292a2b;
+    font-family: 'Abril Fatface', cursive;
+
+   }
+  
+
+
+   .wrapper {
+    text-align: center;
+    margin: auto;
+        /* padding: 50px; */
+       }
