@@ -7,6 +7,7 @@ const usersRouter = require("./users/router");
 const usersProjectsRouter = require("./userProjects/router");
 const usersChallengesRouter = require("./userChallenges/router");
 const challengesRouter = require("./challenges/router");
+const commentsRouter = require("./challengeComment/router");
 const whiteBoardRouter = require("./whiteBoard/router");
 
 const githubOauth = require("./auth/middleware/githubOauth");
@@ -80,7 +81,8 @@ app.use("/users", usersRouter);
 app.use("/users", usersProjectsRouter);
 app.use("/users", usersChallengesRouter);
 app.use("/challenges", challengesRouter);
-app.use("/whiteboard", whiteBoardRouter);
+app.use("/challenges", commentsRouter);
+app.use("/challenges", whiteBoardRouter);
 
 
 

@@ -60,7 +60,7 @@
                 console.log(response);
                 response.data.forEach((challenge, i) => {
                     let userChallenge = document.createElement("div");
-                    userChallenge.innerHTML = `<a href="http://localhost:4000/users/${challenge.user_id}/challenges/${challenge._id}">${challenge.challenge_id.name}</a>`;//added .name
+                    userChallenge.innerHTML = `<a href="http://localhost:4000/users/${challenge.user_id}/challenges/${challenge._id}">${challenge.challenge_id.name}</a>`;//challenge._id is the id for the saved challenge
                     document.getElementById("user-challenges").appendChild(userChallenge);
                 });
 

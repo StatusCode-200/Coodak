@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Whiteboard</title>
+  <link rel="stylesheet" href="/styles/white.css" />
+</head>
+
+<body>
+  <main>
+    <h2 id="titleW">Whiteboard</h2>
+    <% if(whiteboard) {  %>
+    <form action="/challenges/<%= whiteboard._id %>/whiteboard?_method=PUT" method="POST">
+      <%  }else{  %>
+      <form action="/challenges/<%= savedChallengeId %>/whiteboard" method="POST">
+        <% } %>
+        <input type="hidden" name="user_challenge_id" value="<%= savedChallengeId %>">
+        <div class="grid-container">
+          <div class="grid-item">
+            <h3>Problem Domain</h3>
+            <textarea name="problem_domain" id="problemDomain" cols="30" rows="10">
+              <%= whiteboard? whiteboard.problem_domain : null %>
+            </textarea>
+            <br />
+            <label for="input">Input </label>
+            <input name="input" id="input" type="text" value="<%= whiteboard? whiteboard.input : null %>" />
+            <br />
+            <label for="output">Output </label>
+            <input name="output" id="output" type="text" value="<%= whiteboard? whiteboard.output : null %>" />
+          </div>
+
+          <div class="grid-item">
+            <h3>Algorithm</h3>
+            <textarea name="algorithm" id="algorithm" cols="30" rows="10">
+              <%= whiteboard? whiteboard.algorithm : null %>
+            </textarea>
+          </div>
+
+          <div class="grid-item">
+            <h3>Edge Cases</h3>
+            <textarea name="edge_cases" id="edgeCases" cols="30" rows="10">
+              <%= whiteboard? whiteboard.edge_cases : null %>
+            </textarea>
+          </div>
+
+          <div class="grid-item">
+            <h3>pseudo Code</h3>
+            <textarea name="pseudo_code" id="pseudoCode" cols="30" rows="10">
+              <%= whiteboard? whiteboard.pseudo_code : null %>
+            </textarea>
+          </div>
+
+          <div class="grid-item">
+            <h3>Big O</h3>
+            <textarea name="bigo" id="bigo" cols="30" rows="10">
+              <%= whiteboard? whiteboard.bigo : null %>
+            </textarea>
+          </div>
+        </div>
+        <input type="submit" value="save">
+      </form>
+  </main>
+</body>
+
+</html>
