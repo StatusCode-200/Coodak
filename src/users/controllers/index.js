@@ -30,8 +30,7 @@ exports.singup = async (req, res, next) => {
   const username = req.body.username;
   let isUserExist = await User.get(username);
   if (isUserExist) { // to check if the user is already exist and signup
-    res.redirect("/signup?message=user is already exist");
-    return;
+    return res.redirect("/signup?message=user is already exist");
   }
   User.create(req.body).then(async(user) => {
     res.redirect("/signin");
