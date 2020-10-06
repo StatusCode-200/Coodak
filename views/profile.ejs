@@ -49,29 +49,29 @@
     <script>
         function fetchUserData() {
             //get user
-            fetch("http://localhost:4000/users/<%= userId %>", { method: "get" }).then(res => res.json()).then(response => {
+            fetch("/users/<%= userId %>", { method: "get" }).then(res => res.json()).then(response => {
                 console.log(response);
                 let userSection = document.createElement("div");
                 userSection.innerHTML = `<h1>${response.data.username}</h1>`;
                 document.getElementById("user-info").appendChild(userSection);
             });
             //get user challenges
-            fetch("http://localhost:4000/users/<%= userId %>/challenges", { method: "get" }).then(res => res.json()).then(response => {
+            fetch("/users/<%= userId %>/challenges", { method: "get" }).then(res => res.json()).then(response => {
                 console.log(response);
                 response.data.forEach((challenge, i) => {
                     let userChallenge = document.createElement("div");
-                    userChallenge.innerHTML = `<a href="http://localhost:4000/users/${challenge.user_id}/challenges/${challenge._id}">${challenge.challenge_id.name}</a>`;//challenge._id is the id for the saved challenge
+                    userChallenge.innerHTML = `<a href="/users/${challenge.user_id}/challenges/${challenge._id}">${challenge.challenge_id.name}</a>`;//challenge._id is the id for the saved challenge
                     document.getElementById("user-challenges").appendChild(userChallenge);
                 });
 
             });
 
             // get user projects
-            fetch("http://localhost:4000/users/<%= userId %>/projects", { method: "get" }).then(res => res.json()).then(response => {
+            fetch("/users/<%= userId %>/projects", { method: "get" }).then(res => res.json()).then(response => {
                 console.log(response);
                 response.data.forEach((project, i) => {
                     let userProject = document.createElement("div");
-                    userProject.innerHTML = `<a href="http://localhost:4000/users/<%= userId %>/projects/${project._id}">${project.name}</a>`;
+                    userProject.innerHTML = `<a href="/users/<%= userId %>/projects/${project._id}">${project.name}</a>`;
                     document.getElementById("user-projects").appendChild(userProject);
                 });
 

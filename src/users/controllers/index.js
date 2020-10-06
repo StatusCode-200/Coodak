@@ -50,6 +50,18 @@ exports.signin = (req, res, next) => {
   }
 };
 
+exports.signout = (req, res) => {
+  // if(req.token){
+    res.cookie("token", null);
+    // res.clearCookie("token");
+    res.cookie("userId", null);
+    // res.clearCookie("userId");
+    res.redirect("/");
+  // } else {
+    //res.redirect("/");//you won't probably get here
+  // }
+};
+
 exports.getSecret = (req, res) => {
   res.status(200).send(req.user);
 };

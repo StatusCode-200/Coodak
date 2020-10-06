@@ -1,7 +1,7 @@
 const Project = require("../models/projectsModel");
 
 exports.listUserProject = async (req, res) => {
-  const results = await Project.get();
+  const results = await Project.getByUserId(req.params.userId);//userid
   res.status(200).send({ data: results });
 };
 

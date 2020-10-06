@@ -4,12 +4,12 @@ class Projects {
   constructor(){
     this.schema = projectsShema;
   }
-  async get() {
-    return  await this.schema.find().populate("owner_id").exec();
+  async getByUserId(userId) {
+    return  await this.schema.find({owner_id: userId}).populate("owner_id").exec();
   }
 
   async getById(id) {
-    return await this.schema.findOne({_id:id});
+    return await this.schema.findOne({_id:id}).populate("owner_id").exec();
   }
 
   create(record) {
@@ -21,13 +21,13 @@ class Projects {
     return this.schema.findOneAndUpdate({_id : projectId},record, { new: true });
   }
 
-  patch(userName, record){
-    return this.schema.findOneAndUpdate({userName},record, { new: true });
-  }
-
-  delete(userName){
-    return this.schema.deleteOne({userName:userName});
-  }
+  // patch(userName, record){
+  //   return this.schema.findOneAndUpdate({userName},record, { new: true });
+  // }
+  //
+  // delete(userName){
+  //   return this.schema.deleteOne({userName:userName});
+  // }
 }
 
 
