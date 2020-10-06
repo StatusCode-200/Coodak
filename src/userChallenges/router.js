@@ -7,7 +7,7 @@ const userChallengesController = require("./controllers");
 
 router.get("/:userId/challenges",bearerAuth, aclPermission('userChallenges','read'), userChallengesController.listUserChallenges);
 //render saved challenge in challenge page
-router.get("/:userId/challenges/:challengeId", bearerAuth, aclPermission('userChallenges','read'), userChallengesController.getUserChallenge);
+router.get("/:userId/challenges/:challengeId", bearerAuth, aclPermission('userChallenges','read'),userChallengesController.getUserChallenge);//:challengeId for the saved challenge
 
 router.post("/:userId/challenges",bearerAuth, aclPermission('userChallenges','create'), userChallengesController.createUserChallenge);
 
