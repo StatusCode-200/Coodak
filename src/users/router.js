@@ -2,12 +2,13 @@ const router = require("express").Router();
 const basicAuth = require("../auth/middleware/basicAuth.js");
 const bearerAuth = require("../auth/middleware/bearerAuth.js");
 const aclPermission = require("../auth/middleware/acl");
+// const checkIsSameUser = require("../auth/middleware/checkIsSameUser");
 const usersContoller = require("./controllers");
 
 
-router.get("/", bearerAuth, aclPermission('users','read'), usersContoller.listUsers);
+router.get("/", bearerAuth, aclPermission('users','list'), usersContoller.listUsers);
 
-router.get("/secret", usersContoller.getSecret);
+router.get("/secret", bearerAuth, usersContoller.getSecret);
 
 router.get("/:userId",bearerAuth, aclPermission('users','read'), usersContoller.getUser);
 
