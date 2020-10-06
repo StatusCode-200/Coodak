@@ -34,24 +34,23 @@ describe("/auth routes", () => {
   });
 
 
-  
+
 
   it("render the challenges page", () => {
     return mockRequest.get("/challenges").set({ authorization: `Bearer ${token}` })
-        .send(obj)
-        .then((response) => {
-            console.log(response.body);
-            expect(response.status).toEqual(200);//unmodified
-        });
-    });
+      .send(obj)
+      .then((response) => {
+        console.log(response.body);
+        expect(response.status).toEqual(200);//unmodified
+      });
+  });
 
-    it("render one challenge page", () => {
-        mockRequest.get("/challenges").set({ authorization: `Bearer ${token}` })
-            .send(obj)
-            .then((response) => {
-                console.log(response.body);
-                expect(response.status).toEqual(200);//unmodified
-            });
-        });
+  it("render one challenge page", () => {
+    mockRequest.get("/challenges").set({ authorization: `Bearer ${token}` })
+      .send(obj)
+      .then((response) => {
+        console.log(response.body);
+        expect(response.status).toEqual(200);//unmodified
+      });
+  });
 });
-

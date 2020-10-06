@@ -56,8 +56,8 @@ app.all("*", (req, res, next) => {
 });
 
 // page not found middleware
-app.get("/", (req, res) => {
-  res.status(200).render("index");
+app.get("/", optionalAuth, (req, res) => {
+  res.status(200).render("index" , { userId : req.user? req.user.validUser._id : null});
 });
 
 app.get("/signin", (req, res) => {
