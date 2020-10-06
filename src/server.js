@@ -10,6 +10,9 @@ const challengesRouter = require("./challenges/router");
 const commentsRouter = require("./challengeComment/router");
 const whiteBoardRouter = require("./whiteBoard/router");
 
+const bearerAuth = require("./auth/middleware/bearerAuth.js");
+const aclPermission = require("./auth/middleware/acl");
+
 const githubOauth = require("./auth/middleware/githubOauth");
 const googleOauth = require("./auth/middleware/googleOauth");
 const socketHandler = require("./socketHandler");
@@ -69,8 +72,8 @@ app.get("/codeeditor", (req,res)=>{
   res.render("codeeditor",{project: null});
 });
 
-app.get("/profile", (req,res)=>{
-  res.render("profile");
+app.get("/profile",bearerAuth, (req,res)=>{
+  res.render("profile", {userId:req.user.validUser._id});
 });
 
 app.get("/addChallenge", (req,res)=>{

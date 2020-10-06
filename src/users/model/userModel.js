@@ -42,11 +42,11 @@ class User {
         const user = await  this.schema.findOne({ username });
         return Promise.resolve(user);
       } else {
-        return Promise.reject();
+        return Promise.reject("inValid Token");
       }
 
     } catch (e) {
-      return Promise.reject();
+      return Promise.reject("inValid Token");
     }
 
   }
@@ -63,8 +63,7 @@ class User {
       const newRecord = new this.schema(record);
       return newRecord.save();
     }
-    return Promise.reject(); // ==>.catch
-
+    return Promise.reject("user is already exists"); // ==>.catch
   }
   getById(userId) {
     return this.schema.findOne({ _id: userId });
@@ -73,14 +72,14 @@ class User {
     return this.schema.findOneAndUpdate({ userName }, record, { new: true });
   }
 
-  patch(userName, record) {
-    return this.schema.findOneAndUpdate({ userName }, record, { new: true });
-  }
+  // patch(userName, record) {
+  //   return this.schema.findOneAndUpdate({ userName }, record, { new: true });
+  // }
 
-  delete(userName) {
-    return this.schema.deleteOne({ userName: userName });
+  delete(_id) {
+    return this.schema.deleteOne({ _id: _id });
   }
-// resource is either usres or challenges 
+// resource is either usres or challenges
   rolesUsers(role, resource, ability) {
     let allRoles = {
       "users":{
@@ -106,7 +105,7 @@ class User {
 
       return abilities.includes(ability);
 
-  
+
   }
 
 }
