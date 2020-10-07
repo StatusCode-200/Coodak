@@ -19,7 +19,7 @@
                 <% if (solution){  %>
                     <div><a href="/users/<%= userId %>/challenges/<%= savedChallengeId %>/whiteboard">Whiteboard</a></div>
                     <% } %>
-                <p><%= challenge.description %></p>
+                <p><%- challenge.description %></p>
             </div>
 
             <div id="work-area">
