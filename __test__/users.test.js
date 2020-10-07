@@ -81,14 +81,6 @@ describe("/auth routes", () => {
       });
   });
 
-  it("/users post duplicate user", () => {
-    return mockRequest.post(`/users`).set({authorization:`Bearer ${token}`})
-      .send({ username: "test", password: "asd", role: "user" })
-      .then().catch((e) => {
-        expect(e.message).toEqual("user is already exists");
-      });
-  });
-
   it("/users update user", () => {
     return mockRequest.put(`/users/${userId}`).set({authorization:`Bearer ${token}`})
       .send(obj)

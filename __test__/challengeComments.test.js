@@ -9,6 +9,7 @@ describe("/challenges routes", () => {
   const challenge = { name: "adnan", test: "as" };
   let token = "";
   let challengeId = "";
+  let commentId = "";
   it("/signup as valid user", () =>{
     return  mockRequest.post("/users/signup")
       .send(obj)
@@ -34,14 +35,6 @@ describe("/challenges routes", () => {
       });
   });
 
-  it("render the challenges page", () => {
-    return mockRequest.get("/challenges").set({ authorization: `Bearer ${token}` })
-      .send(obj)
-      .then((response) => {
-        expect(response.status).toEqual(200);//unmodified
-      });
-  });
-
   it("post challenge", () => {
     return mockRequest.post("/challenges").set({ authorization: `Bearer ${token}` })
       .send(challenge)
@@ -52,34 +45,46 @@ describe("/challenges routes", () => {
 
   it("list challenges json", () => {
     return mockRequest.get("/challenges/json").set({ authorization: `Bearer ${token}` })
-      .send(obj)
       .then((response) => {
         challengeId = response.body.data[0]._id;
         expect(response.status).toEqual(200);//unmodified
       });
   });
 
-  it("get challenges", () => {
-    return mockRequest.get(`/challenges/${challengeId}`).set({ authorization: `Bearer ${token}` })
-      .send(obj)
+  it("get challenges comments page", () => {
+    return mockRequest.get(`/challenges/${challengeId}/comments`).set({ authorization: `Bearer ${token}` })
       .then((response) => {
         expect(response.status).toEqual(200);
       });
   });
 
-  it("post challenges test", () => {
-    return mockRequest.post(`/challenges/${challengeId}/test`).set({ authorization: `Bearer ${token}` })
-      .send({ solution: "solution" })
+  it("post challenges comments", () => {
+    return mockRequest.post(`/challenges/${challengeId}/comments`).set({ authorization: `Bearer ${token}` })
+      .send({ comment: "comment" })
       .then((response) => {
         expect(response.status).toEqual(200);
       });
   });
 
-  it("delete challenge", () => {
-    return mockRequest.delete(`/challenges/${challengeId}`).set({ authorization: `Bearer ${token}` })
+  it("get challenges comments json", () => {
+    return mockRequest.get(`/challenges/${challengeId}/comments/json`).set({ authorization: `Bearer ${token}` })
+      .then((response) => {
+        commentId = response.body.data[0]._id;
+        expect(response.status).toEqual(200);
+      });
+  });
+
+  it("put challenge comment", () => {
+    return mockRequest.put(`/challenges/${commentId}/comments`).set({ authorization: `Bearer ${token}` })
       .then((response) => {
         expect(response.status).toEqual(200);
       });
   });
 
+  it("delete challenge comment", () => {
+    return mockRequest.delete(`/challenges/${commentId}/comments`).set({ authorization: `Bearer ${token}` })
+      .then((response) => {
+        expect(response.status).toEqual(200);
+      });
+  });
 });
