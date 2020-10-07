@@ -4,24 +4,29 @@ const whiteBoardModel = require("../model/whiteboardModel");
 //get saved whiteboard by the saved userchallenge id
 exports.getUserWhiteBoard = async (req, res) => {
   const userChallengeId =  req.params.userChallengeId;
+  const userId = req.params.userId;
   const results = await whiteBoardModel.get(userChallengeId);
-  res.render("whiteboard",{ whiteboard: results[0], savedChallengeId : userChallengeId });
+  res.render("whiteboard",{ whiteboard: results[0], savedChallengeId : userChallengeId, userId : userId });
 };
 
 exports.createUserWhiteBoard = async (req, res) => {
   const userChallengeId =  req.params.userChallengeId;
-  const results = await whiteBoardModel.create(userChallengeId, Object.assign(req.body,{ user_challenge_id:req.params.userChallengeId}));
+  const userId = req.params.userId;
+   const results = await whiteBoardModel.create(Object.assign(req.body,{ user_challenge_id:req.params.userChallengeId}));
+  //const results = await whiteBoardModel.create(req.body);
   //res.status(200).send({ data: results });//shoud not reload or change the page//go do DOM
-  res.redirect(`/challenges/${req.params.savedChallengeId}/whiteboard`);
+ // res.redirect(`/users/${userId}/challenges/${req.params.savedChallengeId}/whiteboard`);
+  res.render("whiteboard",{ whiteboard: results, savedChallengeId : userChallengeId, userId : userId });
 
 };
 
 /////////////////////////////////////
 //update whiteboard by whiteboard id
 exports.updateWhiteBoard = async (req, res) => {
+  const userId = req.params.userId;
   const results = await whiteBoardModel.update(req.params.userChallengeId, req.body);
   //res.status(200).send({ data: results });
-  res.redirect(`/challenges/${req.params.userChallengeId}/whiteboard`);
+  res.redirect(`/users/${userId}/challenges/${req.params.userChallengeId}/whiteboard`);
 };
 
 exports.deleteWhiteBoard = async (req, res) => {
