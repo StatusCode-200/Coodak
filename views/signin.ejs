@@ -87,7 +87,7 @@
     let googleOptions = {
       response_type: "code",
       client_id: document.location.origin.includes("localhost") ? "425927941032-6o1spfk58qsfo8fdfrka1ang198ahimd.apps.googleusercontent.com" : "119702569642-m6aiji66l3acdhl81jsvf31no84tfa0d.apps.googleusercontent.com",
-      redirect_uri: `${document.location.origin}/oauth `,
+      redirect_uri: `${document.location.origin}/oauth`,
       scope: "openid email profile",
       state: `${document.location.hostname}`,
       access_type: "offline",
