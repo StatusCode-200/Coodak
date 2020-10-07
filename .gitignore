@@ -1,4 +1,6 @@
 tests/*
+!emptyFile
+
 package-lock.json
 
 # Logs

@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest ./__test__ --verbose --coverage",
     "start": "node index.js",
-    "dev": "nodemon index.js --ignore 'tests/**/*.js' --ignore README"
+    "dev": "nodemon index.js --ignore 'tests/**/*.js' --ignore README",
+    "postinstall": "npm install -g mocha"
   },
   "repository": {
     "type": "git",
