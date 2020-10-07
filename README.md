@@ -26,8 +26,16 @@ date: 2020-10-1 10:00
 ---
 ```
 
+## Schemas :
 
+![schema](assest/schemas.png)
 
 ## Wire Frame :
 
-[ Wire Frame](https://wireframe.cc/pro/pp/fa4c8b89c378873)
+[https://wireframe.cc/pro/pp/fa4c8b89c378873](https://wireframe.cc/pro/pp/fa4c8b89c378873)
+
+
+## Documentation : 
+
+[https://ltuc.gitbook.io/codak-docs/](https://ltuc.gitbook.io/codak-docs/)
+
