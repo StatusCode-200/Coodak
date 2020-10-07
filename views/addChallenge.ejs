@@ -12,7 +12,7 @@
   <div class="wrapper">
 
 
-  <form action="/challenges" method="POST">
+  <form action="/challenges" method="POST" id="addChallengeForm">
     <textarea id="description" placeholder="challenge description" name="description" required cols="30" rows="10"></textarea>
 
     <textarea id="summary" placeholder="challenge summary" name="summary" required cols="30" rows="10"></textarea>
@@ -41,6 +41,14 @@
 
 
   <!-- <script type="text/javascript" src="/js/addChallenge.js"></script> -->
+  <script>
+    let addChallengeForm = document.getElementById("addChallengeForm")
+    addChallengeForm.addEventListener("submit", (event)=>{
+    var descriptionEntry = document.getElementById("description");
+    var descriptionEntryBR = descriptionEntry.value.replaceAll(/\n/g,'<br>');//textarea text
+    descriptionEntry.value = descriptionEntryBR;
+    });
+  </script>
 </body>
 
 </html>

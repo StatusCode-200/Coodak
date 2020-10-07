@@ -17,9 +17,9 @@
             <div id="challenge-description">
                 <div><a href="/challenges/<%= challenge._id %>/comments">Forum</a></div>
                 <% if (solution){  %>
-                    <div><a href="/challenges/<%= savedChallengeId %>/whiteboard">Whiteboard</a></div>
+                    <div><a href="/users/<%= userId %>/challenges/<%= savedChallengeId %>/whiteboard">Whiteboard</a></div>
                     <% } %>
-                <p><%= challenge.description %></p>
+                <p><%- challenge.description %></p>
             </div>
 
             <div id="work-area">
