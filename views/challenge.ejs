@@ -59,7 +59,7 @@
         function checkResult() {
             let data = document.getElementById("userSolution").value;
             console.log("data", data);
-            fetch("http://localhost:4000/challenges/<%= challenge._id %>/test", {
+            fetch("/challenges/<%= challenge._id %>/test", {
                 method: "POST",
                 headers: {
                     'Accept': 'application/json',
