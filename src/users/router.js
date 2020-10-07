@@ -10,6 +10,8 @@ router.get("/", bearerAuth, aclPermission('users','list'), usersContoller.listUs
 
 router.get("/secret", bearerAuth, usersContoller.getSecret);
 
+router.get("/signout",usersContoller.signout);
+
 router.get("/:userId",bearerAuth, aclPermission('users','read'), usersContoller.getUser);
 
 router.post("/", bearerAuth, aclPermission('users','create'), usersContoller.createUser);

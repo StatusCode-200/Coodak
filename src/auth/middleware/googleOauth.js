@@ -8,7 +8,7 @@ const {
   CLIENT_SECRET2,
 } = process.env;
 
-const API_SERVER = "http://localhost:4000/oauth";
+const API_SERVER = process.env.API_SERVER;
 
 module.exports = async function (req, res, next) {
   try {
@@ -22,6 +22,10 @@ module.exports = async function (req, res, next) {
     console.log("(3) GOOGLE USER", remoteUser);
 
     const [user, token] = await getUser(remoteUser);
+    console.log("++++++++++++++++++++++++++++++++++++");
+    console.log(user);
+    console.log(token);
+    console.log("++++++++++++++++++++++++++++++++++++");
     req.token = token;
     req.user = user;
 
@@ -47,7 +51,7 @@ async function exchangeCodeForToken(code) {
   console.log("tokenResponse", tokenResponse);
   let access_token = tokenResponse.body.access_token;
   console.log("access Tokken >>>", access_token);
-  console.log("tokenResponse",tokenResponse );
+  console.log("tokenResponse", tokenResponse);
   return access_token;
 }
 
@@ -71,7 +75,25 @@ async function getUser(remoteUser) {
   // const user = await users.save(userRecord);
   // const token = users.generateToken(user);
   let userRecord = new users(record);
-  let user = await userRecord.save();
+  console.log("-----------------------------");
+  console.log(userRecord);
+  console.log("-----------------------------");
+  userRecord = {
+    role: userRecord.role,
+    username: userRecord.username,
+    password: userRecord.password
+  };
+  // let user = await userRecord.save();
+  console.log("-----------------------------");
+  console.log(userRecord);
+  console.log("-----------------------------");
+  let mighterr = await users.updateOne(
+    { username: remoteUser.email },
+    { $set: userRecord },
+    { upsert: true }, // If set to true, creates a new document when no document matches the query criteria
+  );
+  console.log("mighterr", mighterr);
+  let user = await users.findOne({ username: remoteUser.email });
   let token = await Users.generateToken(user);
   return [user, token];
 }

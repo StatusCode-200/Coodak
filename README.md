@@ -8,7 +8,7 @@
 - Laith Al Daree 
 - Raghad Anees 
 - Adnan Muammar 
-- mohammad samara
+- Mohammad Samara
 
 ## users Stories : 
 

@@ -30,8 +30,7 @@ exports.singup = async (req, res, next) => {
   const username = req.body.username;
   let isUserExist = await User.get(username);
   if (isUserExist) { // to check if the user is already exist and signup
-    res.redirect("/signup?message=user is already exist");
-    return;
+    return res.redirect("/signup?message=user is already exist");
   }
   User.create(req.body).then(async(user) => {
     res.redirect("/signin");
@@ -49,6 +48,18 @@ exports.signin = (req, res, next) => {
   } else {
     res.redirect(`/signin?message=msg: ${req.error || "Invalid credentials"}`);
   }
+};
+
+exports.signout = (req, res) => {
+  // if(req.token){
+    res.cookie("token", null);
+    // res.clearCookie("token");
+    res.cookie("userId", null);
+    // res.clearCookie("userId");
+    res.redirect("/");
+  // } else {
+    //res.redirect("/");//you won't probably get here
+  // }
 };
 
 exports.getSecret = (req, res) => {
