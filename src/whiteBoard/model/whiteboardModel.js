@@ -9,7 +9,7 @@ class WhiteBoard {
     return  await this.schema.find({user_challenge_id:user_challenge_id});
   }
 
-  create(user_challenge_id, record) {
+  create(record) {
     const newRecord = new this.schema(record);
     return newRecord.save();
   }

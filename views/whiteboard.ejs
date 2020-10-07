@@ -12,9 +12,9 @@
   <main>
     <h2 id="titleW">Whiteboard</h2>
     <% if(whiteboard) {  %>
-    <form action="/<%= userId %>/challenges/<%= savedChallengeId %>/whiteboard?_method=PUT" method="POST">
+    <form action="/users/<%= userId %>/challenges/<%= savedChallengeId %>/whiteboard?_method=PUT" method="POST">
       <%  }else{  %>
-      <form action="/<%= userId %>/challenges/<%= savedChallengeId %>/whiteboard" method="POST">
+      <form action="/users/<%= userId %>/challenges/<%= savedChallengeId %>/whiteboard" method="POST">
         <% } %>
         <input type="hidden" name="user_challenge_id" value="<%= savedChallengeId %>">
         <div class="grid-container">
@@ -64,8 +64,4 @@
   </main>
 </body>
 
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> 2dd9981ce3d3f65e0bfb286584435ff6e06ca580
