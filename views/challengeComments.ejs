@@ -13,7 +13,7 @@
             <% if(comments.length>0){comments.forEach((comment, i) => { %>
             <div class="commentContainer">
                 <p><%= comment.user_id.username || "anonymous" %></p>
-                <p><%= comment.comment%></p>
+                <p><%- comment.comment%></p>
             </div>
             <% })}else{ %>
             <p>No Comments</p>
@@ -51,7 +51,7 @@
     <script>
  var postComment = document.getElementById('commentBtn');
  postComment.addEventListener("click", (event)=>{
-    var text = document.getElementById("commentText").value;//textarea text
+    var text = document.getElementById("commentText").value.replaceAll(/\n/g,'<br>');//textarea text
      console.log(text);
            event.preventDefault();
            fetch("/challenges/<%= challengeId %>/comments",{method:"post",headers: {
