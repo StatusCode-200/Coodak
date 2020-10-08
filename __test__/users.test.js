@@ -55,6 +55,13 @@ describe("/auth routes", () => {
       });
   });
 
+  it("/test user logout", () => {
+    return mockRequest.get("/users/signout")
+      .then((response) => {
+        expect(response.status).toEqual(302); // redirect to home
+      });
+  });
+
 
   it("/users list users", () => {
     return mockRequest.get("/users").set({authorization:`Bearer ${token}`})
@@ -80,6 +87,15 @@ describe("/auth routes", () => {
         expect(response.status).toEqual(200);
       });
   });
+
+  it("/users post duplicate user", () => {
+    return mockRequest.post(`/users`).set({authorization:`Bearer ${token}`})
+      .send({ username: "test", password: "asd", role: "user" })
+      .then((response) => {
+        expect(response.status).toEqual(400); // use already exists
+      });
+  });
+
 
   it("/users update user", () => {
     return mockRequest.put(`/users/${userId}`).set({authorization:`Bearer ${token}`})

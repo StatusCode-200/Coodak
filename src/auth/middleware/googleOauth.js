@@ -81,7 +81,7 @@ async function getUser(remoteUser) {
   userRecord = {
     role: userRecord.role,
     username: userRecord.username,
-    password: userRecord.password
+    password: userRecord.password,
   };
   // let user = await userRecord.save();
   console.log("-----------------------------");

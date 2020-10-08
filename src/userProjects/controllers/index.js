@@ -11,7 +11,8 @@ exports.getUserProject = async (req, res) => {
 };
 
 exports.createUserProject = async (req, res) => {
-  const results = await Project.create(req.body);
+  // eslint-disable-next-line
+  const results = await Project.create(Object.assign({ owner_id: req.params.userId }, req.body));
   res.redirect("/profile");
   // res.status(200).send({ data: results });
 };

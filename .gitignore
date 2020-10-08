@@ -1,4 +1,4 @@
-tests/*
+//tests/*
 !emptyFile
 
 package-lock.json

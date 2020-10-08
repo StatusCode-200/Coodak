@@ -11,7 +11,6 @@ const challengesRouter = require("./challenges/router");
 const commentsRouter = require("./challengeComment/router");
 
 const bearerAuth = require("./auth/middleware/bearerAuth.js");
-const aclPermission = require("./auth/middleware/acl");
 const optionalAuth = require("./auth/middleware/optionalAuth");
 
 const githubOauth = require("./auth/middleware/githubOauth");
@@ -87,8 +86,6 @@ app.use("/users", usersChallengesRouter);
 app.use("/users", usersChallengeWhiteboardRouter);
 app.use("/challenges", challengesRouter);
 app.use("/challenges", commentsRouter);
-
-
 
 app.get("/oauth", googleOauth, (req, res) => {
   res.cookie("token", req.token);
