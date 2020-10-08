@@ -13,9 +13,9 @@ class Challenges {
     return newRecord.save();
   }
 
-  update(_id, record){
-    return this.schema.findOneAndUpdate({_id},record, { new: true });
-  }
+  // update(_id, record){
+  //   return this.schema.findOneAndUpdate({_id},record, { new: true });
+  // }
 
   // patch(_id, record){
   //   return this.schema.findOneAndUpdate({_id},record, { new: true });

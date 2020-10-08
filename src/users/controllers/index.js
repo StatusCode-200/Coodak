@@ -11,8 +11,12 @@ exports.getUser = async (req, res) => {
 };
 
 exports.createUser = async (req, res) => {
-  const results = await User.create(req.body);
-  res.status(200).send({ data: results });
+  try {
+    const results = await User.create(req.body);
+    res.status(200).send({ data: results });
+  } catch (err) {
+    res.status(400).send({ msg: err.message });
+  }
 };
 
 exports.deleteUser = async (req, res) => {
@@ -32,9 +36,10 @@ exports.singup = async (req, res, next) => {
   if (isUserExist) { // to check if the user is already exist and signup
     return res.redirect("/signup?message=user is already exist");
   }
-  User.create(req.body).then(async(user) => {
-    res.redirect("/signin");
-  })
+  User.create(req.body)
+    .then(async(user) => {
+      res.redirect("/signin");
+    })
     .catch((err) => {
       res.redirect(`/signup?message=${err.message}`);
     });
@@ -51,15 +56,9 @@ exports.signin = (req, res, next) => {
 };
 
 exports.signout = (req, res) => {
-  // if(req.token){
-    res.cookie("token", null);
-    // res.clearCookie("token");
-    res.cookie("userId", null);
-    // res.clearCookie("userId");
-    res.redirect("/");
-  // } else {
-    //res.redirect("/");//you won't probably get here
-  // }
+  res.cookie("token", null);
+  res.cookie("userId", null);
+  res.redirect("/");
 };
 
 exports.getSecret = (req, res) => {

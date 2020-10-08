@@ -9,8 +9,8 @@ describe("/user projects routes", () => {
   const obj = {username: "laith", password: "1234", role: "admin"};
   let token = "";
   let userId = "";
-  let projectId = "";
   let userChallengeId = "";
+  let challengeId = "";
   it("/signup as valid user", () =>{
     return  mockRequest.post("/users/signup")
       .send(obj)
@@ -69,7 +69,7 @@ describe("/user projects routes", () => {
         expect(response.status).toEqual(302); // redirect to profile
       });
   });
-  
+
   it("get user challenges", () => {
     return mockRequest.get(`/users/${userId}/challenges`).set({ authorization: `Bearer ${token}` })
       .then((response) => {
@@ -84,14 +84,14 @@ describe("/user projects routes", () => {
         expect(response.status).toEqual(200);
       });
   });
-  
+
   it("put user challenge", () => {
     return mockRequest.put(`/users/${userId}/challenges/${userChallengeId}`).set({ authorization: `Bearer ${token}` })
       .then((response) => {
         expect(response.status).toEqual(200);
       });
   });
-  
+
   it("delete user challenge", () => {
     return mockRequest.delete(`/users/${userId}/challenges/${userChallengeId}`).set({ authorization: `Bearer ${token}` })
       .then((response) => {

@@ -79,31 +79,31 @@ class User {
   delete(_id) {
     return this.schema.deleteOne({ _id: _id });
   }
-// resource is either usres or challenges
+  // resource is either usres or challenges
   rolesUsers(role, resource, ability) {
     let allRoles = {
       "users":{
         "user": ["read"],
-        "admin":  ['read', 'create', 'update', 'delete', 'list'],
+        "admin":  ["read", "create", "update", "delete", "list"],
       },
       "challenges": {
         "user": ["read"],
-        "admin":  ['read', 'create', 'update', 'delete'],
+        "admin":  ["read", "create", "update", "delete"],
       },
       "userChallenges": {
-        "user":  ['read', 'create', 'update', 'delete'],
-        "admin":  ['read', 'create', 'update', 'delete'],
+        "user":  ["read", "create", "update", "delete"],
+        "admin":  ["read", "create", "update", "delete"],
       },
       "challengeComments": {
-        "user":  ['read', 'create', 'update', 'delete'],
-        "admin":  ['read', 'create', 'update', 'delete'],
-      }
-    }
+        "user":  ["read", "create", "update", "delete"],
+        "admin":  ["read", "create", "update", "delete"],
+      },
+    };
 
     const rolesOfReource = allRoles[resource];
     const abilities = rolesOfReource[role];
 
-      return abilities.includes(ability);
+    return abilities.includes(ability);
 
 
   }

@@ -75,6 +75,13 @@ describe("/challenges routes", () => {
       });
   });
 
+  it("post challenges test no solution", () => {
+    return mockRequest.post(`/challenges/${challengeId}/test`).set({ authorization: `Bearer ${token}` })
+      .then((response) => {
+        expect(response.status).toEqual(500); // no solution
+      });
+  });
+
   it("delete challenge", () => {
     return mockRequest.delete(`/challenges/${challengeId}`).set({ authorization: `Bearer ${token}` })
       .then((response) => {
