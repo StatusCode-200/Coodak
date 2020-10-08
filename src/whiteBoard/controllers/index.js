@@ -12,10 +12,10 @@ exports.getUserWhiteBoard = async (req, res) => {
 exports.createUserWhiteBoard = async (req, res) => {
   const userChallengeId =  req.params.userChallengeId;
   const userId = req.params.userId;
-   const results = await whiteBoardModel.create(Object.assign(req.body,{ user_challenge_id:req.params.userChallengeId}));
+  const results = await whiteBoardModel.create(Object.assign(req.body,{ user_challenge_id:req.params.userChallengeId}));
   //const results = await whiteBoardModel.create(req.body);
   //res.status(200).send({ data: results });//shoud not reload or change the page//go do DOM
- // res.redirect(`/users/${userId}/challenges/${req.params.savedChallengeId}/whiteboard`);
+  // res.redirect(`/users/${userId}/challenges/${req.params.savedChallengeId}/whiteboard`);
   res.render("whiteboard",{ whiteboard: results, savedChallengeId : userChallengeId, userId : userId });
 
 };
@@ -24,6 +24,7 @@ exports.createUserWhiteBoard = async (req, res) => {
 //update whiteboard by whiteboard id
 exports.updateWhiteBoard = async (req, res) => {
   const userId = req.params.userId;
+  // eslint-disable-next-line
   const results = await whiteBoardModel.update(req.params.userChallengeId, req.body);
   //res.status(200).send({ data: results });
   res.redirect(`/users/${userId}/challenges/${req.params.userChallengeId}/whiteboard`);

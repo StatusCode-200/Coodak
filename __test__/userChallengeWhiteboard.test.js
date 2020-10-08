@@ -11,7 +11,6 @@ describe("/user projects routes", () => {
   let token = "";
   let userId = "";
   let challengeId = "";
-  let projectId = "";
   let userChallengeId = "";
   it("/signup as valid user", () =>{
     return  mockRequest.post("/users/signup")
@@ -91,7 +90,7 @@ describe("/user projects routes", () => {
     return mockRequest.post(`/users/${userId}/challenges/${userChallengeId}/whiteboard`).set({ authorization: `Bearer ${token}` })
       .send(whiteboard)
       .then((response) => {
-        expect(response.status).toEqual(302); // refresh the same page
+        expect(response.status).toEqual(200); // samara render the page again to redirect it
       });
   });
 
