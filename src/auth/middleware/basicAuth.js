@@ -11,9 +11,9 @@ module.exports = (req, res, next) => {
   let basic =  req.headers.authorization ? req.headers.authorization.split(" ") : [];
   if (basic[0] == "Basic") {
     [user, pass] = base64.decode(basic[1]).split(":");
-  } else if (req.body.username && req.body.pass) {
+  } else if (req.body.username && req.body.password) {
     user = req.body.username;
-    pass = req.body.pass;
+    pass = req.body.password;
   } else {
     return next("Invalid Login!! ");
   }
