@@ -62,6 +62,6 @@ exports.signout = (req, res) => {
   res.status(200).send({ msg: "success" });
 };
 
-exports.getSecret = (req, res) => {
-  res.status(200).send(req.user);
+exports.validateToken = (req, res) => {
+  res.status(200).send({ user: req.user.validUser });
 };

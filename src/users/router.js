@@ -8,7 +8,7 @@ const usersContoller = require("./controllers");
 
 router.get("/", bearerAuth, aclPermission("users","list"), usersContoller.listUsers);
 
-router.get("/secret", bearerAuth, usersContoller.getSecret);
+router.get("/validateToken", bearerAuth, usersContoller.validateToken);
 
 router.get("/signout",usersContoller.signout);
 
