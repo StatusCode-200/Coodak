@@ -27,7 +27,7 @@ exports.updateWhiteBoard = async (req, res) => {
   const userId = req.params.userId;
   // eslint-disable-next-line
   const results = await whiteBoardModel.update(req.params.userChallengeId, req.body);
-  res.status(200).send({ whiteboard: results[0], savedChallengeId : userChallengeId, userId : userId });
+  res.status(200).send({ whiteboard: results, savedChallengeId : userChallengeId, userId : userId });
   // res.redirect(`/users/${userId}/challenges/${req.params.userChallengeId}/whiteboard`);
 };
 
