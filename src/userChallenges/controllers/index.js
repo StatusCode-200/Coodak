@@ -15,6 +15,7 @@ exports.getUserChallenge =  async (req, res) => {
 exports.createUserChallenge = async (req, res) => {
   // eslint-disable-next-line
   const results = await userChallenges.create(Object.assign({user_id: req.params.userId}, req.body));
+  console.log("challnegeCreated", results);
   res.status(200).send({ data: results[0] });
 };
 
