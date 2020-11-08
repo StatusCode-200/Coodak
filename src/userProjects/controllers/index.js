@@ -7,7 +7,7 @@ exports.listUserProject = async (req, res) => {
 
 exports.getUserProject = async (req, res) => {
   const results = await Project.getById(req.params.projectId);
-  res.status(200).send({project: results[0]});
+  res.status(200).send({project: results});
 };
 
 exports.createUserProject = async (req, res) => {
