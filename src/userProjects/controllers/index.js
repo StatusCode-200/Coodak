@@ -7,14 +7,13 @@ exports.listUserProject = async (req, res) => {
 
 exports.getUserProject = async (req, res) => {
   const results = await Project.getById(req.params.projectId);
-  res.render("codeeditor",{project: results, userId : req.user.validUser._id});
+  res.status(200).send({project: results[0]});
 };
 
 exports.createUserProject = async (req, res) => {
   // eslint-disable-next-line
   const results = await Project.create(Object.assign({ owner_id: req.params.userId }, req.body));
-  res.redirect("/profile");
-  // res.status(200).send({ data: results });
+  res.status(200).send({ data: results[0] });
 };
 
 
