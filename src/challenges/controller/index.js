@@ -4,7 +4,7 @@ const runTest = require("./runTest");
 
 exports.listChallenges = async (req, res) => {
   const results = await challengeModel.get();
-  res.render("challenges",{challenges: results});
+  res.status(200).send({challenges: results});
 };
 
 exports.listChallengesJson = async (req, res) => {
@@ -15,7 +15,7 @@ exports.listChallengesJson = async (req, res) => {
 exports.getChallenge = async (req, res) => {
   const challengeId =  req.params.challengeId;
   const results = await challengeModel.get(challengeId);
-  res.render("challenge",{ challenge: results[0], solution: null, userId:req.user.validUser._id });
+  res.status(200).send({ challenge: results[0] });
 };
 
 exports.createChallenge = async (req, res) => {
