@@ -22,7 +22,7 @@ class Projects {
   }
 
   delete(userId,_id){
-    return this.schema.deleteOne({userId:userId, _id:_id});
+    return this.schema.deleteOne({_id:_id});
   }
 
   // patch(userName, record){
