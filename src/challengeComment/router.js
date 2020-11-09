@@ -7,8 +7,6 @@ const commentsController = require("./controller");
 //post comment by the challenge id
 router.get("/:challengeId/comments" ,bearerAuth,aclPermission("challengeComments", "read"), commentsController.getComments);
 
-router.get("/:challengeId/comments/json" ,bearerAuth,aclPermission("challengeComments", "read"), commentsController.getCommentsJson);
-
 router.post("/:challengeId/comments",bearerAuth,aclPermission("challengeComments", "create"), commentsController.createComments);
 
 router.put("/:commentId/comments",bearerAuth,aclPermission("challengeComments", "update"),commentsController.updateComments);
