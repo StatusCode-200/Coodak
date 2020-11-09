@@ -6,7 +6,11 @@ class UserChallenge {
   }
 
   async get(user_id, challengeId) {
-    return  await this.schema.find({user_id:user_id, challenge_id: challengeId}).populate("challenge_id").exec();
+
+    return  await challengeId ?
+      this.schema.find({ user_id:user_id, challenge_id: challengeId }).populate("challenge_id").exec()
+      :
+      this.schema.find({ user_id:user_id }).populate("challenge_id").exec();
   }
 
   create(record) {
