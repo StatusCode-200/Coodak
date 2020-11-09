@@ -14,7 +14,7 @@ class ChallengeComment {
 
   create(record) {
     const newRecord = new this.schema(record);
-    return newRecord.save();
+    return newRecord.save().then(t => t.populate("user_id").execPopulate());
   }
 
   update(_id, record){
