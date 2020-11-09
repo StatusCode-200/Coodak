@@ -38,7 +38,7 @@ exports.singup = async (req, res, next) => {
   }
   User.create(req.body)
     .then(async(user) => {
-      res.redirect("/signin");
+      res.status(200).send({ user });
     })
     .catch((err) => {
       res.status(400).send({ msg: err.message });

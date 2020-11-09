@@ -1,12 +1,6 @@
 const commentModel = require("../model/commentModel");
-//get all comments for one challenge by challengeId
-exports.getComments = async (req, res) => {
-  const challengeId =  req.params.challengeId;
-  const results = await commentModel.getByChallengeId(challengeId);
-  res.render("challengeComments",{ comments: results, challengeId : challengeId, username: req.user.validUser.username });
-};
 
-exports.getCommentsJson = async (req, res) => {
+exports.getComments = async (req, res) => {
   const challengeId =  req.params.challengeId;
   const results = await commentModel.getByChallengeId(challengeId);
   res.status(200).send({ data: results });
