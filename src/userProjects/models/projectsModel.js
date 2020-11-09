@@ -21,6 +21,10 @@ class Projects {
     return this.schema.findOneAndUpdate({_id : projectId},record, { new: true });
   }
 
+  delete(userId,_id){
+    return this.schema.deleteOne({userId:userId, _id:_id});
+  }
+
   // patch(userName, record){
   //   return this.schema.findOneAndUpdate({userName},record, { new: true });
   // }

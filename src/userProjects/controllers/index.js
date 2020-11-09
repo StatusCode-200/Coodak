@@ -21,3 +21,10 @@ exports.updateUserProject = async (req, res) => {
   const results = await Project.update(req.params.projectId, req.body);
   res.status(200).send({ data: results });
 };
+
+exports.deleteUserProject = async (req, res) => {
+  const userId = req.params.userId;
+  const _id = req.params.projectId;
+  const results = await Project.delete(userId, _id);
+  res.status(200).send({ data: results });
+};

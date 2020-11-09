@@ -10,5 +10,6 @@ router.get("/:userId/projects/:projectId", bearerAuth, aclPermission("userChalle
 
 router.post("/:userId/projects",bearerAuth, aclPermission("userChallenges","create"), projectsControllers.createUserProject);
 router.put("/:userId/projects/:projectId",bearerAuth, aclPermission("userChallenges","update"), projectsControllers.updateUserProject);
+router.delete("/:userId/projects/:projectId",bearerAuth, aclPermission("userChallenges","delete"), projectsControllers.deleteUserProject);
 
 module.exports = router;
