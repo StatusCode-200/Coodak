@@ -7,15 +7,20 @@ exports.listUserChallenges = async (req, res) => {
 };
 
 exports.getUserChallenge =  async (req, res) => {
-  const results = await userChallenges.getById(req.params.challengeId);//challengeId for the saved challenge
-  res.status(200).send({challenge: results.challenge_id, solution: results.solution, savedChallengeId:req.params.challengeId, userId:req.user.validUser._id});
+  const userId =  req.params.userId;
+  const results = await userChallenges.get(userId,req.params.challengeId);//challengeId for the saved challenge
+  if (results[0]){
+    res.status(200).send({challenge: results[0].challenge_id, solution: results[0].solution });
+  } else {
+    res.status(200).send({ challenge: {}, solution: null });
+  }
   // challenge : the original challenge because results.challenge_id (populated)     //solution: for the saved one
 };
 
 exports.createUserChallenge = async (req, res) => {
   // eslint-disable-next-line
   const results = await userChallenges.create(Object.assign({user_id: req.params.userId}, req.body));
-  res.status(200).send({ data: results[0] });
+  res.status(200).send({ data: results });
 };
 
 exports.updateUserChallenge= async (req, res) => {

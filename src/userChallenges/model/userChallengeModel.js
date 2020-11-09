@@ -5,12 +5,8 @@ class UserChallenge {
     this.schema = userChallengeShema;
   }
 
-  async get(user_id) {
-    return  await this.schema.find({user_id:user_id}).populate("challenge_id").exec();
-  }
-
-  async getById(id) {
-    return await this.schema.findOne({_id:id}).populate("challenge_id").exec();
+  async get(user_id, challengeId) {
+    return  await this.schema.find({user_id:user_id, challenge_id: challengeId}).populate("challenge_id").exec();
   }
 
   create(record) {
@@ -19,7 +15,7 @@ class UserChallenge {
   }
 
   update(user_id, record){
-    return this.schema.findOneAndUpdate({user_id},record, { new: true });
+    return this.schema.findOneAndUpdate({user_id}, record, { new: true });
   }
 
   // patch(user_id, record){

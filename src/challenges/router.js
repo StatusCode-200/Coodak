@@ -7,8 +7,6 @@ const challengesCtroller = require("./controller");
 //all challenges page
 router.get("/", challengesCtroller.listChallenges);
 
-router.get("/json",bearerAuth, aclPermission("challenges","read"), challengesCtroller.listChallengesJson);
-
 //one challenge page before saving into the user profile
 router.get("/:challengeId", challengesCtroller.getChallenge);
 
