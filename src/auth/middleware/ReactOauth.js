@@ -64,10 +64,10 @@ async function getRemoteUserInfo(token) {
   
 async function getUser(remoteUser) {
   const record = {
-    username: remoteUser.given_name,
+    username: remoteUser.name,
     password: "oauthpassword",
-    email: remoteUser.email,
-    image: remoteUser.picture,
+    // email: remoteUser.email,
+    // image: remoteUser.picture,
   };
   
   let userRecord = new users(record);
@@ -78,20 +78,20 @@ async function getUser(remoteUser) {
     role: userRecord.role,
     username: userRecord.username,
     password: userRecord.password,
-    email: userRecord.email,
-    image: userRecord.image,
+    // email: userRecord.email,
+    // image: userRecord.image,
   };
   // let user = await userRecord.save();
   console.log("-----------------------------");
   console.log(userRecord);
   console.log("-----------------------------");
   let mighterr = await users.updateOne(
-    { username: remoteUser.email },
+    { username: remoteUser.username },
     { $set: userRecord },
     { upsert: true }, // If set to true, creates a new document when no document matches the query criteria
   );
   console.log("mighterr", mighterr);
-  let user = await users.findOne({ username: remoteUser.email });
+  let user = await users.findOne({ username: remoteUser.username });
   let token = await Users.generateToken(user);
   return [user, token];
 }
