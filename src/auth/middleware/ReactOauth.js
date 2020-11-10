@@ -6,6 +6,7 @@ const users = require("../../users/model/userSchema.js");
 module.exports = async function (req, res, next) {
   try {
     const remoteToken = req.query.token;
+    console.log("remoteToken",remoteToken);
     
     // let code = req.query.code;
     // console.log("(1) CODE:", code);
