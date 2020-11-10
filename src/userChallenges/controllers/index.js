@@ -24,7 +24,7 @@ exports.createUserChallenge = async (req, res) => {
 };
 
 exports.updateUserChallenge= async (req, res) => {
-  const results = await userChallenges.update(req.params.userId,req.body);
+  const results = await userChallenges.update(req.params.userId, req.params.challengeId,req.body);
   res.status(200).send({ data: results });
 };
 

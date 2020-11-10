@@ -18,8 +18,8 @@ class UserChallenge {
     return newRecord.save();
   }
 
-  update(user_id, record){
-    return this.schema.findOneAndUpdate({user_id}, record, { new: true });
+  update(user_id, challenge_id, record){
+    return this.schema.findOneAndUpdate({ user_id, challenge_id }, record);
   }
 
   // patch(user_id, record){
