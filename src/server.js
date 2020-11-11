@@ -17,6 +17,8 @@ const githubOauth = require("./auth/middleware/githubOauth");
 const googleOauth = require("./auth/middleware/googleOauth");
 const socketHandler = require("./socketHandler");
 
+const ReactOauth = require("./auth/middleware/ReactOauth");
+
 const app = express();
 const httpServer = http.createServer(app);
 const io = require("socket.io")(httpServer);
@@ -99,6 +101,11 @@ app.get("/oauth2", githubOauth, (req, res) => {
   res.cookie("token", req.token);
   res.cookie("userId", req.user._id);
   res.status(200).redirect("/");
+});
+
+// react app google Aouth
+app.get("/reactOauth", ReactOauth, (req, res) => {
+  res.send({token : req.token, userId: req.user._id, user: req.user});
 });
 
 // page not found middleware
