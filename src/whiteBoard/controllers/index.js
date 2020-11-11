@@ -16,7 +16,7 @@ exports.createUserWhiteBoard = async (req, res) => {
   //const results = await whiteBoardModel.create(req.body);
   //res.status(200).send({ data: results });//shoud not reload or change the page//go do DOM
   // res.redirect(`/users/${userId}/challenges/${req.params.savedChallengeId}/whiteboard`);
-  res.status(200).send({ whiteboard: results[0], savedChallengeId : userChallengeId, userId : userId });
+  res.status(200).send({ whiteboard: results, savedChallengeId : userChallengeId, userId : userId });
 
 };
 
